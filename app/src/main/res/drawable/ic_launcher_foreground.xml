@@ -1,0 +1,41 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- AR target brackets (kept inside the adaptive safe zone) -->
+    <group android:name="brackets">
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="3"
+            android:strokeLineCap="round" android:fillColor="#00000000"
+            android:pathData="M34,28 h-7 a3,3 0 0 0 -3,3 v7" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="3"
+            android:strokeLineCap="round" android:fillColor="#00000000"
+            android:pathData="M74,28 h7 a3,3 0 0 1 3,3 v7" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="3"
+            android:strokeLineCap="round" android:fillColor="#00000000"
+            android:pathData="M34,80 h-7 a3,3 0 0 1 -3,-3 v-7" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="3"
+            android:strokeLineCap="round" android:fillColor="#00000000"
+            android:pathData="M74,80 h7 a3,3 0 0 0 3,-3 v-7" />
+    </group>
+
+    <!-- Soft contact shadow under the cube -->
+    <path android:pathData="M54,82m-17,0a17,4 0,1 1,34 0a17,4 0,1 1,-34 0z"
+        android:fillColor="#22000000" />
+
+    <!-- Isometric cube (a 3D model floating in AR) -->
+    <!-- top face (brightest) -->
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M54,33 L74,44 L54,55 L34,44 Z" />
+    <!-- left face -->
+    <path android:fillColor="#E6FFFFFF"
+        android:pathData="M34,44 L54,55 L54,78 L34,67 Z" />
+    <!-- right face (darkest for depth) -->
+    <path android:fillColor="#B3FFFFFF"
+        android:pathData="M74,44 L54,55 L54,78 L74,67 Z" />
+    <!-- crisp edge highlight on the top ridge -->
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="1.4"
+        android:strokeLineJoin="round" android:fillColor="#00000000"
+        android:pathData="M34,44 L54,33 L74,44" />
+</vector>

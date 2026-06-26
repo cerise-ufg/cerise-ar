@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CERISE brand palette — captured from cerise.ufg.br -->
+    <color name="cerise">#C60463</color>           <!-- primary (cherry/magenta) -->
+    <color name="cerise_dark">#9A0049</color>
+    <color name="cerise_light">#FCE7F1</color>      <!-- light pink tint -->
+    <color name="purple">#67046A</color>            <!-- secondary deep purple -->
+    <color name="purple_dark">#4A0249</color>
+    <color name="cyan">#78D5EF</color>              <!-- accent cyan -->
+    <color name="orange">#F96D00</color>            <!-- accent orange -->
+    <color name="yellow">#F4B400</color>            <!-- category accent -->
+    <color name="green">#1FAA6E</color>             <!-- category accent -->
+    <color name="blue">#2D6CDF</color>              <!-- category accent -->
+
+    <color name="ink">#1A1020</color>               <!-- near-black with a purple cast -->
+    <color name="ink_soft">#2A1B33</color>
+    <color name="surface_light">#FFFBFD</color>
+    <color name="on_surface_muted">#6E5A66</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="scrim">#99000000</color>
+    <color name="scrim_strong">#CC1A1020</color>
+</resources>

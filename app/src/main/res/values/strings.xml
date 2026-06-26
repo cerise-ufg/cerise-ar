@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">CERISE AR</string>
+
+    <!-- Home -->
+    <string name="brand_name">CERISE</string>
+    <string name="brand_full">Centro de Excelência em Redes Sem Fio Inteligentes e Serviços Avançados</string>
+    <string name="tagline">Redes que pensam, aplicações que sentem</string>
+    <string name="home_section_title">Tecnologias Imersivas · Realidade Aumentada</string>
+    <string name="home_pick_model">Escolha um modelo 3D</string>
+    <string name="home_pick_hint">Toque em um modelo e inicie a experiência em realidade aumentada.</string>
+    <string name="start_ar">Iniciar em AR</string>
+    <string name="explore_future">Explorando o futuro</string>
+    <string name="badge_animated">ANIMADO</string>
+    <string name="home_categories">Categorias</string>
+    <string name="export_model">Exportar .glb</string>
+    <string name="share_model">Compartilhar</string>
+
+    <!-- Menu / dialogs -->
+    <string name="menu_export">Exportar modelo</string>
+    <string name="menu_credits">Créditos dos modelos</string>
+    <string name="credits_title">Créditos</string>
+    <string name="close">Fechar</string>
+    <string name="choose_export">Como deseja exportar %1$s?</string>
+    <string name="export_save_file">Salvar arquivo…</string>
+    <string name="export_success">Modelo exportado com sucesso</string>
+    <string name="export_failed">Falha ao exportar o modelo</string>
+    <string name="share_subject">Modelo 3D · CERISE AR</string>
+
+    <!-- AR -->
+    <string name="ar_scan_hint">Aponte a câmera para uma superfície plana e mova o aparelho devagar</string>
+    <string name="ar_tap_hint">Toque em uma superfície para posicionar o modelo</string>
+    <string name="ar_placed">Modelo posicionado · arraste para mover, gire e redimensione</string>
+    <string name="ar_clear">Limpar</string>
+    <string name="ar_capture">Tirar foto</string>
+    <string name="photo_saved_gallery">Foto salva na galeria</string>
+    <string name="photo_saved">Foto capturada</string>
+    <string name="photo_failed">Não foi possível capturar a foto</string>
+    <string name="share_photo">Compartilhar</string>
+    <string name="cd_capture">Tirar foto da cena</string>
+    <string name="ar_loading">Carregando modelo…</string>
+    <string name="ar_back">Voltar</string>
+    <string name="ar_model_count">%1$d na cena</string>
+
+    <!-- Errors / states -->
+    <string name="camera_permission_required">A permissão de câmera é necessária para a experiência em AR</string>
+    <string name="ar_unsupported">Este dispositivo não é compatível com ARCore. A AR não está disponível.</string>
+    <string name="ar_install_arcore">É necessário instalar/atualizar o Google Play Services para AR.</string>
+    <string name="ar_init_error">Não foi possível iniciar a sessão de AR.</string>
+    <string name="model_load_error">Erro ao carregar o modelo 3D.</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_logo">Logotipo CERISE</string>
+    <string name="cd_back">Voltar</string>
+    <string name="cd_clear">Limpar a cena</string>
+</resources>

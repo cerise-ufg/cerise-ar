@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ArActivity">
+
+    <io.github.sceneview.ar.ARSceneView
+        android:id="@+id/sceneView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="16dp">
+
+        <!-- Top bar -->
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_circle_button"
+            android:contentDescription="@string/cd_back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/modelChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/chip_glass"
+            android:drawablePadding="6dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textFontWeight="600"
+            android:textSize="14sp"
+            app:drawableStartCompat="@drawable/ic_cube"
+            app:layout_constraintBottom_toBottomOf="@id/backButton"
+            app:layout_constraintStart_toEndOf="@id/backButton"
+            app:layout_constraintTop_toTopOf="@id/backButton" />
+
+        <TextView
+            android:id="@+id/countChip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_glass"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:text="0"
+            android:textColor="@color/cyan"
+            android:textFontWeight="700"
+            android:textSize="13sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/backButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/backButton" />
+
+        <!-- Instruction card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/instructionCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="22dp"
+            app:cardBackgroundColor="#CC1A1020"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#33FFFFFF"
+            app:strokeWidth="1dp"
+            app:layout_constraintBottom_toTopOf="@id/captureButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_max="420dp">
+
+            <TextView
+                android:id="@+id/instructionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="14dp"
+                android:text="@string/ar_scan_hint"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Shutter (capture scene photo) -->
+        <ImageButton
+            android:id="@+id/captureButton"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginBottom="26dp"
+            android:background="@drawable/bg_shutter"
+            android:contentDescription="@string/cd_capture"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_camera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Clear scene -->
+        <ImageButton
+            android:id="@+id/clearButton"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_circle_button"
+            android:contentDescription="@string/cd_clear"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_clear"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/captureButton"
+            app:layout_constraintBottom_toBottomOf="@id/captureButton"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Shutter flash effect -->
+    <View
+        android:id="@+id/shutterFlash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="@color/white"
+        android:importantForAccessibility="no" />
+
+    <!-- Loading scrim -->
+    <FrameLayout
+        android:id="@+id/loadingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorColor="@color/cerise"
+            app:indicatorSize="60dp"
+            app:trackColor="#33FFFFFF" />
+    </FrameLayout>
+
+</FrameLayout>

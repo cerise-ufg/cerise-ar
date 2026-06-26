@@ -1,0 +1,84 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base CERISE theme (light). -->
+    <style name="Base.Theme.CeriseAR" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/cerise</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/cerise_light</item>
+        <item name="colorOnPrimaryContainer">@color/cerise_dark</item>
+
+        <item name="colorSecondary">@color/purple</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="colorTertiary">@color/cyan</item>
+        <item name="colorOnTertiary">@color/ink</item>
+
+        <item name="android:colorBackground">@color/surface_light</item>
+        <item name="colorSurface">@color/surface_light</item>
+        <item name="colorOnSurface">@color/ink</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_muted</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/surface_light</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Brand typeface across the whole app. -->
+        <item name="fontFamily">@font/work_sans</item>
+        <item name="android:fontFamily">@font/work_sans</item>
+    </style>
+
+    <style name="Theme.CeriseAR" parent="Base.Theme.CeriseAR" />
+
+    <!-- Fullscreen, dark-chrome theme used by the AR camera screen. -->
+    <style name="Theme.CeriseAR.Fullscreen" parent="Theme.CeriseAR">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <!-- Pill / CTA button. -->
+    <style name="Widget.Cerise.Button.Cta" parent="Widget.Material3.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/cerise</item>
+        <item name="cornerRadius">28dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/work_sans</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <style name="Widget.Cerise.Button.Icon" parent="Widget.Material3.Button.IconButton">
+        <item name="iconTint">@color/white</item>
+    </style>
+
+    <!-- Category filter chip styled for the dark brand backdrop. -->
+    <style name="Widget.Cerise.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textColor">@color/chip_text</item>
+        <item name="chipBackgroundColor">@color/chip_bg</item>
+        <item name="chipStrokeColor">#40FFFFFF</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="chipMinHeight">36dp</item>
+        <item name="android:textFontWeight">600</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+    </style>
+
+    <!-- Outlined "export" button used on the model detail card. -->
+    <style name="Widget.Cerise.Button.Export" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/cerise</item>
+        <item name="iconTint">@color/cerise</item>
+        <item name="strokeColor">@color/cerise</item>
+        <item name="cornerRadius">22dp</item>
+        <item name="android:textFontWeight">600</item>
+    </style>
+
+    <!-- Toolbar action-icon tinting on the gradient. -->
+    <style name="Widget.Cerise.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+</resources>
