@@ -73,25 +73,16 @@ struct HomeView: View {
     }
 
     private var hero: some View {
-        VStack(spacing: 10) {
-            ZStack {
-                Circle()
-                    .fill(LinearGradient(colors: [Color(hex: 0xFF2C86), Brand.cerise],
-                                         startPoint: .topLeading, endPoint: .bottomTrailing))
-                    .frame(width: 74, height: 74)
-                    .overlay(Circle().stroke(.white.opacity(0.2), lineWidth: 1.5))
-                Image(systemName: "cube.transparent.fill")
-                    .font(.system(size: 34))
-                    .foregroundColor(.white)
-            }
-            Text("CERISE")
-                .font(.work(34, .heavy))
-                .foregroundColor(.white)
-            Text("Redes que pensam, aplicações que sentem")
-                .font(.work(14))
-                .foregroundColor(.white.opacity(0.88))
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 36)
+        VStack(spacing: 12) {
+            // Official CERISE logo on a white card (reads on the magenta gradient).
+            Image("LogoCerise")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 34)
+                .padding(.horizontal, 22)
+                .padding(.vertical, 14)
+                .background(RoundedRectangle(cornerRadius: 22, style: .continuous).fill(.white))
+                .shadow(color: .black.opacity(0.18), radius: 8, y: 4)
             Text("Tecnologias Imersivas · Realidade Aumentada")
                 .font(.work(12, .semibold))
                 .foregroundColor(.white.opacity(0.95))

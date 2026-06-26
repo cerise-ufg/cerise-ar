@@ -4,7 +4,6 @@
     <!-- Home -->
     <string name="brand_name">CERISE</string>
     <string name="brand_full">Centro de Excelência em Redes Sem Fio Inteligentes e Serviços Avançados</string>
-    <string name="tagline">Redes que pensam, aplicações que sentem</string>
     <string name="home_section_title">Tecnologias Imersivas · Realidade Aumentada</string>
     <string name="home_pick_model">Escolha um modelo 3D</string>
     <string name="home_pick_hint">Toque em um modelo e inicie a experiência em realidade aumentada.</string>

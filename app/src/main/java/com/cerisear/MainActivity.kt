@@ -215,7 +215,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun playIntroAnimations() {
         val views = listOf(
-            binding.logo, binding.brandName, binding.tagline, binding.sectionLabel,
+            binding.logo, binding.sectionLabel,
             binding.categoryChips, binding.pickTitle, binding.pickHint,
             binding.modelList, binding.detailCard, binding.startButton
         )
@@ -225,17 +225,6 @@ class MainActivity : AppCompatActivity() {
             view.animate().alpha(1f).translationY(0f)
                 .setStartDelay(110L + i * 60L).setDuration(400).start()
         }
-        binding.logo.post { breatheLogo() }
-    }
-
-    private fun breatheLogo() {
-        if (isFinishing) return
-        val target = if (binding.logo.scaleX > 1f) 1.0f else 1.05f
-        binding.logo.animate().scaleX(target).scaleY(target)
-            .setStartDelay(if (target == 1.05f) 700 else 0)
-            .setDuration(1600)
-            .withEndAction { breatheLogo() }
-            .start()
     }
 
     override fun onResume() {

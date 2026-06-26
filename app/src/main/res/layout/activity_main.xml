@@ -31,52 +31,33 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Hero -->
-            <FrameLayout
+            <!-- Hero: official CERISE logo on a white card (reads on the magenta gradient) -->
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/logo"
-                android:layout_width="74dp"
-                android:layout_height="74dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/bg_logo_badge">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/cd_logo"
-                    android:src="@drawable/ic_cube" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/brandName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:letterSpacing="0.12"
-                android:text="@string/brand_name"
-                android:textColor="@color/white"
-                android:textFontWeight="800"
-                android:textSize="34sp" />
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="8dp">
 
-            <TextView
-                android:id="@+id/tagline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginHorizontal="40dp"
-                android:gravity="center"
-                android:text="@string/tagline"
-                android:textColor="#DEFFFFFF"
-                android:textSize="14sp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="62dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/cd_logo"
+                    android:paddingHorizontal="22dp"
+                    android:paddingVertical="14dp"
+                    android:src="@drawable/logo_cerise" />
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/sectionLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/chip_outline"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="7dp"

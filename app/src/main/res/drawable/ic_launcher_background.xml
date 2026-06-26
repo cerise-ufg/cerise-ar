@@ -4,27 +4,15 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- CERISE brand gradient: cherry-magenta into deep purple. -->
+    <!-- Soft light backdrop so the colourful CERISE emblem reads clearly. -->
     <path android:pathData="M0,0h108v108h-108z">
         <aapt:attr name="android:fillColor" xmlns:aapt="http://schemas.android.com/aapt">
             <gradient
                 android:startX="0" android:startY="0"
                 android:endX="108" android:endY="108"
                 android:type="linear">
-                <item android:offset="0.0" android:color="#FFC60463" />
-                <item android:offset="0.55" android:color="#FF8E0556" />
-                <item android:offset="1.0" android:color="#FF67046A" />
-            </gradient>
-        </aapt:attr>
-    </path>
-    <!-- subtle highlight glow -->
-    <path android:pathData="M70,18m-34,0a34,34 0,1 1,68 0a34,34 0,1 1,-68 0z">
-        <aapt:attr name="android:fillColor" xmlns:aapt="http://schemas.android.com/aapt">
-            <gradient
-                android:centerX="70" android:centerY="18" android:gradientRadius="46"
-                android:type="radial">
-                <item android:offset="0.0" android:color="#33FFFFFF" />
-                <item android:offset="1.0" android:color="#00FFFFFF" />
+                <item android:offset="0.0" android:color="#FFFFFFFF" />
+                <item android:offset="1.0" android:color="#FFFCE7F1" />
             </gradient>
         </aapt:attr>
     </path>
