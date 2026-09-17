@@ -1,6 +1,16 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+}
+
+// Signing config for release/OTA builds. keystore.properties is gitignored;
+// every OTA update MUST be signed with the same keystore or Android rejects it.
+val keystoreProperties = Properties().apply {
+    val f = rootProject.file("keystore.properties")
+    if (f.exists()) load(FileInputStream(f))
 }
 
 android {
@@ -15,6 +25,27 @@ android {
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Where the app checks for OTA updates. Points to a JSON manifest served
+        // over HTTPS (see webar/../ota or the server). Change here when the host
+        // is finalized; the updater no-ops gracefully if it can't be reached.
+        buildConfigField(
+            "String",
+            "OTA_MANIFEST_URL",
+            "\"https://cerise.wenfur.com.br/ota/version.json\""
+        )
+    }
+
+    signingConfigs {
+        create("release") {
+            val sf = keystoreProperties.getProperty("storeFile")
+            if (sf != null) {
+                storeFile = rootProject.file(sf)
+                storePassword = keystoreProperties.getProperty("storePassword")
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+            }
+        }
     }
 
     buildTypes {
@@ -24,6 +55,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Sign release with the CERISE keystore when it is present.
+            if (keystoreProperties.getProperty("storeFile") != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 
@@ -38,6 +73,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     // Filament / SceneView assets must not be compressed.

@@ -17,6 +17,7 @@
     <!-- Menu / dialogs -->
     <string name="menu_export">Exportar modelo</string>
     <string name="menu_credits">Créditos dos modelos</string>
+    <string name="menu_update">Buscar atualização</string>
     <string name="credits_title">Créditos</string>
     <string name="close">Fechar</string>
     <string name="choose_export">Como deseja exportar %1$s?</string>

@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity() {
         binding.exportButton.setOnClickListener { showExportOptions() }
         playIntroAnimations()
 
+        // Silent OTA check on launch: only prompts if a newer build is published.
+        OtaUpdater.checkForUpdate(this, silent = true)
+
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() = finish()
         })
@@ -64,6 +67,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_export -> { showExportOptions(); true }
         R.id.action_credits -> { showCredits(); true }
+        R.id.action_update -> { OtaUpdater.checkForUpdate(this, silent = false); true }
         else -> super.onOptionsItemSelected(item)
     }
 

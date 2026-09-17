@@ -5,6 +5,10 @@
     <!-- AR requires the camera. -->
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <!-- OTA self-update: download the new APK and launch its install. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
     <!-- This is an AR-first app: ARCore is required, so Google Play only offers it to
          AR-capable devices and installs Google Play Services for AR automatically. -->
     <uses-feature android:name="android.hardware.camera" android:required="true" />
