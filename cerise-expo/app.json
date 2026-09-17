@@ -7,7 +7,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "scheme": "cerisear",
-    "runtimeVersion": { "policy": "appVersion" },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
     "updates": {
       "enabled": true,
       "fallbackToCacheTimeout": 0,
@@ -24,7 +26,9 @@
     },
     "android": {
       "package": "com.cerisear",
-      "permissions": ["android.permission.CAMERA"],
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#1A1020",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -33,7 +37,10 @@
       },
       "predictiveBackGestureEnabled": false
     },
-    "plugins": ["expo-font"],
+    "plugins": [
+      "expo-font",
+      "@reactvision/react-viro"
+    ],
     "web": {
       "favicon": "./assets/favicon.png"
     }
