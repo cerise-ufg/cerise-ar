@@ -21,6 +21,11 @@
     <key>CFBundleVersion</key>
     <string>$(CURRENT_PROJECT_VERSION)</string>
 
+    <!-- App uses only standard/exempt encryption (HTTPS) — skips the export
+         compliance prompt on every TestFlight/App Store Connect upload. -->
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
+
     <!-- ARKit is required (mirrors the Android "ARCore required" decision). -->
     <key>UIRequiredDeviceCapabilities</key>
     <array>

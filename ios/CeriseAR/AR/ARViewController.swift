@@ -260,7 +260,7 @@ final class ARViewController: UIViewController,
         guard let url = Bundle.main.url(forResource: model.assetName, withExtension: "glb") else {
             completion(nil); return
         }
-        GLTFAsset.loadAsset(with: url, options: [:]) { [weak self] _, status, asset, _, _ in
+        GLTFAsset.load(with: url, options: [:]) { [weak self] _, status, asset, _, _ in
             guard let self = self else { return }
             guard status == .complete, let asset = asset else {
                 DispatchQueue.main.async { completion(nil) }

@@ -43,16 +43,33 @@ if ! xcode-select -p >/dev/null 2>&1; then
     die "no active developer directory — run: sudo xcode-select -s /Applications/Xcode.app"
 fi
 
-if ! command -v xcodegen >/dev/null 2>&1; then
-    command -v brew >/dev/null 2>&1 || die "xcodegen is missing and Homebrew is not installed — see https://brew.sh"
-    step "Installing XcodeGen"
-    brew install xcodegen
+# Resolve an xcodegen binary. Prefer one on PATH; else Homebrew; else download
+# the official prebuilt release (this Mac may have neither brew nor xcodegen).
+XCODEGEN="$(command -v xcodegen || true)"
+if [[ -z "$XCODEGEN" ]]; then
+    LOCAL_XG="$IOS_DIR/tools/xcodegen/bin/xcodegen"
+    if [[ -x "$LOCAL_XG" ]]; then
+        XCODEGEN="$LOCAL_XG"
+    elif command -v brew >/dev/null 2>&1; then
+        step "Installing XcodeGen via Homebrew"
+        brew install xcodegen
+        XCODEGEN="$(command -v xcodegen)"
+    else
+        step "Downloading XcodeGen (no Homebrew found)"
+        mkdir -p "$IOS_DIR/tools"
+        ( cd "$IOS_DIR/tools" \
+          && curl -fL -o xcodegen.zip \
+             https://github.com/yonaskolb/XcodeGen/releases/latest/download/xcodegen.zip \
+          && rm -rf xcodegen && unzip -q xcodegen.zip )
+        XCODEGEN="$LOCAL_XG"
+        [[ -x "$XCODEGEN" ]] || die "failed to download XcodeGen"
+    fi
 fi
-echo "xcodegen $(xcodegen --version)"
+echo "xcodegen $("$XCODEGEN" --version)"
 
 # ------------------------------------------------------------ generate project
 step "Generating CeriseAR.xcodeproj from project.yml"
-xcodegen generate
+"$XCODEGEN" generate
 
 if [[ $OPEN_ONLY -eq 1 ]]; then
     open CeriseAR.xcodeproj

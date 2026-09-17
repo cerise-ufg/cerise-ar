@@ -28,7 +28,8 @@ targets:
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         TARGETED_DEVICE_FAMILY: "1,2"
         SWIFT_VERSION: "5.0"
-        # Set your signing team in Xcode (Signing & Capabilities) after generating.
+        # Signing: automatic, team pre-selected so Xcode Archive works out of the box.
+        DEVELOPMENT_TEAM: "6T2ZP362BQ"
         CODE_SIGN_STYLE: Automatic
     dependencies:
       - package: GLTFKit2
