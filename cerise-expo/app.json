@@ -12,6 +12,7 @@
     },
     "updates": {
       "enabled": true,
+      "url": "https://cerise.wenfur.com.br/updates/manifest",
       "fallbackToCacheTimeout": 0,
       "checkAutomatically": "ON_LOAD"
     },
