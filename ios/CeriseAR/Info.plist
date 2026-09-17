@@ -55,6 +55,10 @@
         <false/>
     </dict>
 
+    <!-- Portrait-only: opt out of iPad multitasking so App Store validation
+         doesn't require all four orientations. -->
+    <key>UIRequiresFullScreen</key>
+    <true/>
     <key>UISupportedInterfaceOrientations</key>
     <array>
         <string>UIInterfaceOrientationPortrait</string>
