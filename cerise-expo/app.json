@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "CERISE AR",
+    "slug": "cerise-ar",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "cerisear",
+    "runtimeVersion": { "policy": "appVersion" },
+    "updates": {
+      "enabled": true,
+      "fallbackToCacheTimeout": 0,
+      "checkAutomatically": "ON_LOAD"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "br.ufg.cerise.arviewer",
+      "requireFullScreen": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "A câmera é usada para a experiência em realidade aumentada do CERISE AR.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.cerisear",
+      "permissions": ["android.permission.CAMERA"],
+      "adaptiveIcon": {
+        "backgroundColor": "#1A1020",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": ["expo-font"],
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
