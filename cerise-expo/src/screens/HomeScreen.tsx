@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import {
   FlatList,
+  Image,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -34,8 +35,15 @@ export default function HomeScreen({ onOpenAr, onOpenGame }: Props) {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header / brand */}
         <View style={styles.header}>
-          <View style={styles.logoBadge}>
-            <Text style={styles.logoText}>CERISE</Text>
+          <View style={styles.brandRow}>
+            <Image
+              source={require('../../assets/emblem.png')}
+              style={styles.emblem}
+              resizeMode="contain"
+            />
+            <Text style={styles.brand}>
+              CERISE <Text style={{ color: Colors.cerise }}>AR</Text>
+            </Text>
           </View>
           <Pressable
             onPress={() => Alert.alert('Créditos dos modelos', creditsText())}
@@ -136,13 +144,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: Space.md,
   },
-  logoBadge: {
-    backgroundColor: Colors.cerise,
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: Radius.sm,
-  },
-  logoText: { color: Colors.white, fontWeight: '800', letterSpacing: 2 },
+  brandRow: { flexDirection: 'row', alignItems: 'center', gap: Space.sm },
+  emblem: { width: 34, height: 34 },
+  brand: { color: Colors.white, fontWeight: '800', fontSize: 20, letterSpacing: 1 },
   credits: { color: Colors.cyan, fontWeight: '600' },
   h1: { color: Colors.white, fontSize: 28, fontWeight: '800', marginTop: Space.lg },
   sub: { color: Colors.muted, marginTop: 4, marginBottom: Space.md },

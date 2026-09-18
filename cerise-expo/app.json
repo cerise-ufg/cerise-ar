@@ -31,10 +31,8 @@
         "android.permission.CAMERA"
       ],
       "adaptiveIcon": {
-        "backgroundColor": "#1A1020",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#FCE7F1"
       },
       "predictiveBackGestureEnabled": false
     },
