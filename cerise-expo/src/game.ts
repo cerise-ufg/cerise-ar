@@ -1,14 +1,13 @@
 import { Colors } from './theme';
 
 /**
- * CERISE Summit scavenger hunt: N animated characters scattered in AR; find and
- * tap each within the time limit.
+ * CERISE Summit scavenger hunt characters.
  *
- * Only LIGHT animated GLBs are used (three.js examples + Khronos, CC-BY/CC0):
- * rendering 10 heavy skinned meshes at once crashed the app (OOM/GPU), so the
- * heavy human models were dropped and a few light ones repeat under distinct
- * names. Metro reuses each require() asset, so repeats cost ~no extra memory.
- * `scale` was derived from each model's bounding box to render ~0.5 m.
+ * Fun, colorful, low-poly ANIMATED creatures from Gobkit (CC0 / public domain —
+ * free for any use, no attribution). Low-poly + small (~100 KB each) so all 10
+ * render at once without the earlier OOM crash. `danceClip` = 'idle' (an in-place
+ * bob) and the scene adds a spin, so they read as "dancing"; `scale` was derived
+ * from each model's bounding box to render ~0.5 m tall.
  */
 export type HuntCharacter = {
   id: string;
@@ -21,25 +20,21 @@ export type HuntCharacter = {
   license: string;
 };
 
-const ROBOT = require('../assets/models/game/robot_dance.glb');
-const FLAMINGO = require('../assets/models/game/flamingo.glb');
-const PARROT = require('../assets/models/game/parrot2.glb');
-const STORK = require('../assets/models/game/stork.glb');
-const HORSE = require('../assets/models/game/horse.glb');
-const FOX = require('../assets/models/game/fox.glb');
-const CESIUM = require('../assets/models/game/cesiumman.glb');
+const A = 'Gobkit';
+const L = 'CC0';
+const CLIP = 'idle';
 
 export const HUNT_CHARACTERS: HuntCharacter[] = [
-  { id: 'robot', name: 'Robô Dançarino', accent: Colors.cerise, scale: 0.19, danceClip: 'Dance', model: ROBOT, author: 'Tomás Laulhé / Don McCurdy', license: 'CC0' },
-  { id: 'flamingo', name: 'Flamingo', accent: Colors.orange, scale: 0.0028, danceClip: 'flamingo_flyA_', model: FLAMINGO, author: 'mirada (three.js)', license: 'CC-BY' },
-  { id: 'parrot', name: 'Papagaio', accent: Colors.green, scale: 0.005, danceClip: 'parrot_A_', model: PARROT, author: 'mirada (three.js)', license: 'CC-BY' },
-  { id: 'stork', name: 'Cegonha', accent: Colors.cyan, scale: 0.0025, danceClip: 'storkFly_B_', model: STORK, author: 'mirada (three.js)', license: 'CC-BY' },
-  { id: 'horse', name: 'Cavalo', accent: Colors.yellow, scale: 0.0016, danceClip: 'horse_A_', model: HORSE, author: 'mirada (three.js)', license: 'CC-BY' },
-  { id: 'fox', name: 'Raposa', accent: Colors.orange, scale: 0.0032, danceClip: 'Run', model: FOX, author: 'PixelMannen / tomkranis', license: 'CC0' },
-  { id: 'cesium', name: 'Homem Ciano', accent: Colors.cyan, scale: 0.33, model: CESIUM, author: 'Cesium', license: 'CC-BY 4.0' },
-  { id: 'robot2', name: 'Robô Azul', accent: Colors.blue, scale: 0.19, danceClip: 'Dance', model: ROBOT, author: 'Tomás Laulhé / Don McCurdy', license: 'CC0' },
-  { id: 'fox2', name: 'Raposa Veloz', accent: Colors.purple, scale: 0.0032, danceClip: 'Run', model: FOX, author: 'PixelMannen / tomkranis', license: 'CC0' },
-  { id: 'horse2', name: 'Pônei', accent: Colors.green, scale: 0.0016, danceClip: 'horse_A_', model: HORSE, author: 'mirada (three.js)', license: 'CC-BY' },
+  { id: 'trex', name: 'T-Rex', accent: Colors.green, scale: 0.062, danceClip: CLIP, model: require('../assets/models/hunt/trex.glb'), author: A, license: L },
+  { id: 'triceratops', name: 'Tricerátops', accent: Colors.orange, scale: 0.055, danceClip: CLIP, model: require('../assets/models/hunt/triceratops.glb'), author: A, license: L },
+  { id: 'stego', name: 'Stego', accent: Colors.cyan, scale: 0.051, danceClip: CLIP, model: require('../assets/models/hunt/stegosaurus.glb'), author: A, license: L },
+  { id: 'duck', name: 'Patinho', accent: Colors.yellow, scale: 0.0011, danceClip: CLIP, model: require('../assets/models/hunt/duck.glb'), author: A, license: L },
+  { id: 'corgi', name: 'Corgi', accent: Colors.orange, scale: 0.0011, danceClip: CLIP, model: require('../assets/models/hunt/corgi.glb'), author: A, license: L },
+  { id: 'jellyfish', name: 'Água-viva', accent: Colors.purple, scale: 0.0012, danceClip: CLIP, model: require('../assets/models/hunt/jellyfish.glb'), author: A, license: L },
+  { id: 'shark', name: 'Tubarão', accent: Colors.blue, scale: 0.0007, danceClip: CLIP, model: require('../assets/models/hunt/shark.glb'), author: A, license: L },
+  { id: 'bee', name: 'Abelha', accent: Colors.yellow, scale: 0.076, danceClip: CLIP, model: require('../assets/models/hunt/bee.glb'), author: A, license: L },
+  { id: 'owl', name: 'Coruja', accent: Colors.cerise, scale: 0.128, danceClip: CLIP, model: require('../assets/models/hunt/owl.glb'), author: A, license: L },
+  { id: 'whale', name: 'Baleia', accent: Colors.blue, scale: 0.088, danceClip: CLIP, model: require('../assets/models/hunt/whale.glb'), author: A, license: L },
 ];
 
 export const HUNT_TIME_SECONDS = 5 * 60; // 5-minute hunt
