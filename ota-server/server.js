@@ -67,8 +67,40 @@ function latestUpdate(runtimeVersion) {
 }
 
 const app = express();
+app.use(express.json({ limit: '32kb' }));
 
 app.get('/health', (_req, res) => res.json({ ok: true, base: PUBLIC_BASE }));
+
+// ---- CERISE Summit hunt leaderboard (ranking by time) --------------------
+const SCORES_FILE = path.join(DATA_DIR, 'scores.json');
+const readScores = () => {
+  try { return JSON.parse(fs.readFileSync(SCORES_FILE, 'utf8')); } catch { return []; }
+};
+// Rank: most found first, then fastest time.
+const rankScores = (list) =>
+  [...list].sort((a, b) => (b.found - a.found) || (a.seconds - b.seconds));
+
+app.get('/scores', (_req, res) => {
+  res.set('cache-control', 'no-store');
+  res.json(rankScores(readScores()).slice(0, 100));
+});
+
+app.post('/scores', (req, res) => {
+  const b = req.body || {};
+  const entry = {
+    name: String(b.name || 'Anônimo').slice(0, 24),
+    seconds: Math.max(0, Math.floor(Number(b.seconds) || 0)),
+    found: Math.max(0, Math.floor(Number(b.found) || 0)),
+    total: Math.max(1, Math.floor(Number(b.total) || 1)),
+    at: new Date().toISOString(),
+  };
+  const list = readScores();
+  list.push(entry);
+  try { fs.writeFileSync(SCORES_FILE, JSON.stringify(list)); } catch (e) {
+    return res.status(500).json({ error: 'could not save' });
+  }
+  res.json({ ok: true, rank: rankScores(list).findIndex((s) => s.at === entry.at) + 1 });
+});
 
 app.get('/manifest', (req, res) => {
   const runtimeVersion = req.header('expo-runtime-version');
