@@ -137,6 +137,7 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
   const [timeLeft, setTimeLeft] = useState(HUNT_TIME_SECONDS);
   const [scores, setScores] = useState<Score[] | null>(null);
   const [saving, setSaving] = useState(false);
+  const [detected, setDetected] = useState(false);
   const [calibrated, setCalibrated] = useState(false);
 
   const total = HUNT_CHARACTERS.length;
@@ -168,11 +169,12 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
     anchoredOnce.current = true;
     const ry = Array.isArray(a.rotation) ? a.rotation[1] : 0;
     markerRef.current = { pos: a.position as Vec3, ry }; // freeze the origin
-    setCalibrated(true);
+    setDetected(true); // QR entered the frame → ask the user to hold steady
+    setTimeout(() => setCalibrated(true), 1600); // held long enough → locked
     setTimeout(() => {
       if (isAdmin) setPhase('placing');
       else loadLayoutAndPlay();
-    }, 1400);
+    }, 2600);
   };
 
   async function loadLayoutAndPlay() {
@@ -260,10 +262,10 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
         />
       )}
 
-      {/* QR alignment rectangle while scanning */}
+      {/* QR alignment rectangle while scanning (green once the QR is inside) */}
       {phase === 'scanning' && !calibrated && (
         <View pointerEvents="none" style={styles.reticleWrap}>
-          <View style={styles.qrBox} />
+          <View style={[styles.qrBox, detected && { borderColor: Colors.green }]} />
         </View>
       )}
 
@@ -303,10 +305,18 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
           </View>
         )}
 
-        {phase === 'scanning' && !calibrated && (
+        {phase === 'scanning' && !detected && (
           <View style={styles.card} pointerEvents="none">
             <Text style={styles.title}>Encaixe o QR no quadro</Text>
-            <Text style={styles.note}>Alinhe o QR central dentro do retângulo. O mundo começa quando ele for reconhecido.</Text>
+            <Text style={styles.note}>Alinhe o QR central dentro do retângulo para começar.</Text>
+          </View>
+        )}
+
+        {phase === 'scanning' && detected && !calibrated && (
+          <View style={[styles.card, { backgroundColor: Colors.green }]} pointerEvents="none">
+            <ActivityIndicator color={Colors.white} />
+            <Text style={styles.title}>🎯 QR detectado!</Text>
+            <Text style={styles.note}>Mantenha o QR no quadro, sem mexer, enquanto calibramos…</Text>
           </View>
         )}
 

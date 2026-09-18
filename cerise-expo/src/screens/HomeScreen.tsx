@@ -10,7 +10,10 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import * as Updates from 'expo-updates';
 import { Colors, Radius, Space } from '../theme';
+
+const VERSION_LABEL = `v${Updates.runtimeVersion || '1.0.0'} · ${(Updates.updateId || 'base').slice(0, 8)}`;
 import {
   ArModel,
   CATEGORIES,
@@ -131,6 +134,8 @@ export default function HomeScreen({ onOpenAr, onOpenGame }: Props) {
             <Text style={styles.ctaText}>Ver em AR</Text>
           </Pressable>
         </View>
+
+        <Text style={styles.version}>{VERSION_LABEL}</Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -221,4 +226,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ctaText: { color: Colors.white, fontSize: 16, fontWeight: '800' },
+  version: { color: Colors.muted, fontSize: 11, textAlign: 'center', marginBottom: Space.md, opacity: 0.7 },
 });
