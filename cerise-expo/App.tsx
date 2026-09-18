@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import HomeScreen from './src/screens/HomeScreen';
 import ArScreen from './src/screens/ArScreen';
+import GameScreen from './src/screens/GameScreen';
 import { ArModel } from './src/catalog';
 import { Colors } from './src/theme';
 
@@ -13,6 +14,7 @@ export default function App() {
     WorkSans: require('./assets/fonts/WorkSans-Variable.ttf'),
   });
   const [arModel, setArModel] = useState<ArModel | null>(null);
+  const [game, setGame] = useState(false);
 
   if (!fontsLoaded) {
     return <View style={{ flex: 1, backgroundColor: Colors.ink }} />;
@@ -21,10 +23,12 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <StatusBar style="light" />
-      {arModel ? (
+      {game ? (
+        <GameScreen onClose={() => setGame(false)} />
+      ) : arModel ? (
         <ArScreen model={arModel} onClose={() => setArModel(null)} />
       ) : (
-        <HomeScreen onOpenAr={setArModel} />
+        <HomeScreen onOpenAr={setArModel} onOpenGame={() => setGame(true)} />
       )}
     </SafeAreaProvider>
   );
