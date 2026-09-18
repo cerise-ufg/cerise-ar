@@ -31,7 +31,7 @@ ViroAnimations.registerAnimations({
 // device anchors to the SAME physical marker, so objects land in the same spots.
 ViroARTrackingTargets.createTargets({
   ceriseQR: {
-    source: require('../assets/qr-cerise.png'),
+    source: require('../../assets/qr-cerise.png'),
     orientation: 'Up',
     physicalWidth: 0.3, // print the QR at 30 cm
   },
