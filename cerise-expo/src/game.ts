@@ -22,7 +22,7 @@ const G = 'Gobkit (CC0)';
 
 export const HUNT_CHARACTERS: HuntCharacter[] = [
   { id: 'dancer1', name: 'Dançarino Rosa', accent: Colors.cerise, scale: 0.3, danceClip: 'hiphop', model: DANCER, author: '8thWall / Mixamo', license: 'sample' },
-  { id: 'trex', name: 'T-Rex', accent: Colors.green, scale: 0.062, danceClip: 'idle', model: require('../assets/models/hunt/trex.glb'), author: G, license: 'CC0' },
+  { id: 'shark', name: 'Tubarão', accent: Colors.blue, scale: 0.0007, danceClip: 'idle', model: require('../assets/models/hunt/shark.glb'), author: G, license: 'CC0' },
   { id: 'duck', name: 'Patinho', accent: Colors.yellow, scale: 0.0011, danceClip: 'idle', model: require('../assets/models/hunt/duck.glb'), author: G, license: 'CC0' },
   { id: 'dancer2', name: 'Dançarino Ciano', accent: Colors.cyan, scale: 0.3, danceClip: 'hiphop', model: DANCER, author: '8thWall / Mixamo', license: 'sample' },
   { id: 'corgi', name: 'Corgi', accent: Colors.orange, scale: 0.0011, danceClip: 'idle', model: require('../assets/models/hunt/corgi.glb'), author: G, license: 'CC0' },
@@ -30,7 +30,7 @@ export const HUNT_CHARACTERS: HuntCharacter[] = [
   { id: 'dancer3', name: 'Dançarino Laranja', accent: Colors.orange, scale: 0.3, danceClip: 'hiphop', model: DANCER, author: '8thWall / Mixamo', license: 'sample' },
   { id: 'bee', name: 'Abelha', accent: Colors.yellow, scale: 0.076, danceClip: 'idle', model: require('../assets/models/hunt/bee.glb'), author: G, license: 'CC0' },
   { id: 'owl', name: 'Coruja', accent: Colors.cerise, scale: 0.128, danceClip: 'idle', model: require('../assets/models/hunt/owl.glb'), author: G, license: 'CC0' },
-  { id: 'triceratops', name: 'Tricerátops', accent: Colors.blue, scale: 0.055, danceClip: 'idle', model: require('../assets/models/hunt/triceratops.glb'), author: G, license: 'CC0' },
+  { id: 'whale', name: 'Baleia', accent: Colors.blue, scale: 0.088, danceClip: 'idle', model: require('../assets/models/hunt/whale.glb'), author: G, license: 'CC0' },
 ];
 
 export const HUNT_TIME_SECONDS = 5 * 60; // 5-minute hunt
