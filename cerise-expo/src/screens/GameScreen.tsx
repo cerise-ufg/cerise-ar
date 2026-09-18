@@ -70,6 +70,8 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
   const [timeLeft, setTimeLeft] = useState(HUNT_TIME_SECONDS);
   const [scores, setScores] = useState<Score[] | null>(null);
   const [gaveUp, setGaveUp] = useState(false);
+  const [worldCreated, setWorldCreated] = useState(false);
+  const [lastWasCreator, setLastWasCreator] = useState(false);
   const total = HUNT_CHARACTERS.length;
   const submitted = useRef(false);
 
@@ -98,8 +100,14 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
   async function finish(gaveUpNow: boolean) {
     if (submitted.current) return;
     submitted.current = true;
+    const creator = !worldCreated; // the first run just creates the world
     setGaveUp(gaveUpNow);
+    setLastWasCreator(creator);
     setPhase('done');
+    if (creator) {
+      setWorldCreated(true); // keeps the AR scene mounted -> world persists
+      return; // creator's round is NOT scored
+    }
     const my: Score = {
       name: name.trim() || 'Anônimo',
       seconds: won ? elapsed : HUNT_TIME_SECONDS,
@@ -120,11 +128,11 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
 
   return (
     <View style={styles.root}>
-      {phase !== 'intro' && (
+      {(worldCreated || phase !== 'intro') && (
         <ViroARSceneNavigator
           autofocus
           initialScene={{ scene: HuntScene as any }}
-          viroAppProps={{ foundIds, onFound }}
+          viroAppProps={{ foundIds: phase === 'playing' ? foundIds : [], onFound }}
           style={styles.nav}
         />
       )}
@@ -138,7 +146,7 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
               <Text style={styles.chipText}>{foundIds.length}/{total}</Text>
             </View>
             <Pressable style={[styles.chip, { backgroundColor: Colors.purple }]} onPress={() => finish(true)} hitSlop={10}>
-              <Text style={styles.chipText}>Desistir</Text>
+              <Text style={styles.chipText}>{worldCreated ? 'Desistir' : 'Concluir'}</Text>
             </Pressable>
           </View>
           <View style={styles.hintWrap} pointerEvents="none">
@@ -151,21 +159,36 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
       <Modal transparent visible={phase === 'intro'} animationType="fade">
         <View style={styles.backdrop}>
           <View style={styles.modal}>
-            <Text style={styles.title}>🎯 Caça CERISE</Text>
-            <Text style={styles.note}>
-              Encontre {total} personagens em AR em {Math.round(HUNT_TIME_SECONDS / 60)} minutos. Toque em cada um para capturar!
-            </Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Digite seu nome"
-              placeholderTextColor={Colors.muted}
-              value={name}
-              onChangeText={setName}
-              maxLength={24}
-            />
-            <Pressable style={[styles.cta, !name.trim() && { opacity: 0.5 }]} disabled={!name.trim()} onPress={startHunt}>
-              <Text style={styles.ctaText}>Começar a caça</Text>
-            </Pressable>
+            {!worldCreated ? (
+              <>
+                <Text style={styles.title}>🌍 Criar o mundo</Text>
+                <Text style={styles.note}>
+                  Você é o organizador. Ande pelo espaço para posicionar os {total} personagens.
+                  Sua rodada NÃO conta no placar — depois é só passar o celular.
+                </Text>
+                <Pressable style={styles.cta} onPress={startHunt}>
+                  <Text style={styles.ctaText}>Criar o mundo</Text>
+                </Pressable>
+              </>
+            ) : (
+              <>
+                <Text style={styles.title}>🎯 Caça CERISE</Text>
+                <Text style={styles.note}>
+                  Encontre {total} personagens em AR em {Math.round(HUNT_TIME_SECONDS / 60)} minutos. Toque em cada um para capturar!
+                </Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Digite seu nome"
+                  placeholderTextColor={Colors.muted}
+                  value={name}
+                  onChangeText={setName}
+                  maxLength={24}
+                />
+                <Pressable style={[styles.cta, !name.trim() && { opacity: 0.5 }]} disabled={!name.trim()} onPress={startHunt}>
+                  <Text style={styles.ctaText}>Começar a caça</Text>
+                </Pressable>
+              </>
+            )}
             <Pressable onPress={onClose}><Text style={styles.later}>Sair</Text></Pressable>
           </View>
         </View>
@@ -175,29 +198,44 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
       <Modal transparent visible={phase === 'done'} animationType="fade">
         <View style={styles.backdrop}>
           <View style={styles.modal}>
-            <Text style={styles.title}>
-              {won ? '🎉 Completou!' : gaveUp ? '🏳️ Você desistiu' : '⏰ Tempo esgotado'}
-            </Text>
-            <Text style={styles.note}>
-              {won ? `Achou os ${total} em ${fmt(elapsed)}!` : `Você capturou ${foundIds.length} de ${total}.`}
-            </Text>
-            <Text style={styles.rankTitle}>🏆 Placar (por tempo)</Text>
-            {scores === null ? (
-              <ActivityIndicator color={Colors.white} />
-            ) : scores.length === 0 ? (
-              <Text style={styles.note}>Sem conexão com o placar.</Text>
+            {lastWasCreator ? (
+              <>
+                <Text style={styles.title}>✅ Mundo criado!</Text>
+                <Text style={styles.note}>
+                  Os {total} personagens estão posicionados. Não feche o app — passe o
+                  celular para o primeiro jogador.
+                </Text>
+                <Pressable style={styles.cta} onPress={playAgain}>
+                  <Text style={styles.ctaText}>Passar o celular</Text>
+                </Pressable>
+              </>
             ) : (
-              scores.slice(0, 8).map((s, i) => (
-                <View key={i} style={styles.rankRow}>
-                  <Text style={styles.rankPos}>{i + 1}º</Text>
-                  <Text style={styles.rankName} numberOfLines={1}>{s.name}</Text>
-                  <Text style={styles.rankVal}>{s.found >= s.total ? fmt(s.seconds) : `${s.found}/${s.total}`}</Text>
-                </View>
-              ))
+              <>
+                <Text style={styles.title}>
+                  {won ? '🎉 Completou!' : gaveUp ? '🏳️ Você desistiu' : '⏰ Tempo esgotado'}
+                </Text>
+                <Text style={styles.note}>
+                  {won ? `Achou os ${total} em ${fmt(elapsed)}!` : `Você capturou ${foundIds.length} de ${total}.`}
+                </Text>
+                <Text style={styles.rankTitle}>🏆 Placar (por tempo)</Text>
+                {scores === null ? (
+                  <ActivityIndicator color={Colors.white} />
+                ) : scores.length === 0 ? (
+                  <Text style={styles.note}>Sem conexão com o placar.</Text>
+                ) : (
+                  scores.slice(0, 8).map((s, i) => (
+                    <View key={i} style={styles.rankRow}>
+                      <Text style={styles.rankPos}>{i + 1}º</Text>
+                      <Text style={styles.rankName} numberOfLines={1}>{s.name}</Text>
+                      <Text style={styles.rankVal}>{s.found >= s.total ? fmt(s.seconds) : `${s.found}/${s.total}`}</Text>
+                    </View>
+                  ))
+                )}
+                <Pressable style={styles.cta} onPress={playAgain}>
+                  <Text style={styles.ctaText}>Jogar de novo</Text>
+                </Pressable>
+              </>
             )}
-            <Pressable style={styles.cta} onPress={playAgain}>
-              <Text style={styles.ctaText}>Jogar de novo</Text>
-            </Pressable>
             <Pressable onPress={onClose}><Text style={styles.later}>Sair</Text></Pressable>
           </View>
         </View>
