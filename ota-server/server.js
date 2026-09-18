@@ -175,6 +175,22 @@ app.get('/manifest', (req, res) => {
   res.status(200).set({ ...commonHeaders, 'content-type': 'application/json' }).send(JSON.stringify(manifest));
 });
 
+// ---- Hunt map: admin places objects (positions relative to the QR origin) ---
+const LAYOUT_FILE = path.join(DATA_DIR, 'layout.json');
+app.get('/layout', (_req, res) => {
+  res.set('cache-control', 'no-store');
+  try { res.json(JSON.parse(fs.readFileSync(LAYOUT_FILE, 'utf8'))); }
+  catch { res.json({ positions: [] }); }
+});
+app.post('/layout', (req, res) => {
+  const b = req.body || {};
+  const positions = Array.isArray(b.positions) ? b.positions.slice(0, 50) : [];
+  const doc = { positions, at: new Date().toISOString() };
+  try { fs.writeFileSync(LAYOUT_FILE, JSON.stringify(doc)); }
+  catch (e) { return res.status(500).json({ error: 'save failed' }); }
+  res.json({ ok: true, count: positions.length });
+});
+
 app.get('/assets', (req, res) => {
   const relPath = String(req.query.path || '');
   const contentType = String(req.query.contentType || 'application/octet-stream');
