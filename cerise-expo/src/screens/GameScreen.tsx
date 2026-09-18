@@ -126,6 +126,7 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
   const [timeLeft, setTimeLeft] = useState(HUNT_TIME_SECONDS);
   const [scores, setScores] = useState<Score[] | null>(null);
   const [saving, setSaving] = useState(false);
+  const [calibrated, setCalibrated] = useState(false);
 
   const total = HUNT_CHARACTERS.length;
   const reticleRef = useRef<[number, number, number] | null>(null);
@@ -150,11 +151,12 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
     }
     if (anchoredOnce.current) return;
     anchoredOnce.current = true;
-    if (isAdmin) {
-      setPhase('placing');
-    } else {
-      loadLayoutAndPlay();
-    }
+    // Confirm to the user that the shared origin is set, then proceed.
+    setCalibrated(true);
+    setTimeout(() => {
+      if (isAdmin) setPhase('placing');
+      else loadLayoutAndPlay();
+    }, 1400);
   };
 
   const onReticle = (pos: [number, number, number]) => { reticleRef.current = pos; };
@@ -290,11 +292,18 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
           </View>
         )}
 
-        {phase === 'scanning' && (
+        {phase === 'scanning' && !calibrated && (
           <View style={styles.card} pointerEvents="none">
             <ActivityIndicator color={Colors.white} />
             <Text style={styles.title}>Aponte para o QR CERISE</Text>
-            <Text style={styles.note}>Centralize a câmera no QR central para calibrar.</Text>
+            <Text style={styles.note}>Centralize a câmera no QR central para calibrar a origem.</Text>
+          </View>
+        )}
+
+        {phase === 'scanning' && calibrated && (
+          <View style={[styles.card, { backgroundColor: Colors.green }]} pointerEvents="none">
+            <Text style={styles.title}>✅ Centralizado no ponto comum!</Text>
+            <Text style={styles.note}>Origem calibrada pelo QR. Preparando…</Text>
           </View>
         )}
 
