@@ -71,22 +71,23 @@ function HuntScene(props: any) {
     isAdmin: boolean;
     onFound: (id: string) => void;
     onMarker: (anchor: any) => void;
-    onFrame: (hit: Vec3 | null, camPos: Vec3 | null, camFwd: Vec3 | null) => void;
+    onCam: (pos: Vec3, fwd: Vec3) => void;
   };
 
   return (
     <ViroARScene
-      onCameraARHitTest={(results: any) => {
-        const cam = results?.cameraOrientation;
-        const camPos: Vec3 | null = cam?.position || null;
-        const camFwd: Vec3 | null = cam?.forward || null;
-        const arr = results?.hitTestResults || (Array.isArray(results) ? results : []);
-        let hit: Vec3 | null = null;
-        if (arr && arr.length) {
-          const h = arr.find((r: any) => String(r.type || '').toLowerCase().includes('plane')) || arr[0];
-          hit = h?.transform?.position || h?.position || null;
+      onCameraTransformUpdate={(u: any) => {
+        const t = u?.cameraTransform ?? u;
+        let pos: Vec3 | null = null;
+        let fwd: Vec3 | null = null;
+        if (Array.isArray(t) && t.length >= 9) {
+          pos = [t[0], t[1], t[2]];
+          fwd = [t[6], t[7], t[8]];
+        } else if (t?.position) {
+          pos = t.position;
+          fwd = t.forward;
         }
-        p.onFrame(hit, camPos, camFwd);
+        if (pos && fwd) p.onCam(pos, fwd);
       }}
     >
       <ViroAmbientLight color="#FFFFFF" intensity={800} />
@@ -140,7 +141,6 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
 
   const total = HUNT_CHARACTERS.length;
   const localList = useRef<Placement[]>([]); // marker-local, for saving
-  const hitRef = useRef<Vec3 | null>(null);
   const camPosRef = useRef<Vec3 | null>(null);
   const camFwdRef = useRef<Vec3 | null>(null);
   const markerRef = useRef<{ pos: Vec3; ry: number } | null>(null); // frozen once
@@ -157,10 +157,9 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
     return () => clearInterval(t);
   }, [phase, timeLeft, won]);
 
-  const onFrame = (hit: Vec3 | null, camPos: Vec3 | null, camFwd: Vec3 | null) => {
-    hitRef.current = hit;
-    if (camPos) camPosRef.current = camPos;
-    if (camFwd) camFwdRef.current = camFwd;
+  const onCam = (pos: Vec3, fwd: Vec3) => {
+    camPosRef.current = pos;
+    camFwdRef.current = fwd;
   };
 
   const onMarker = (a: any) => {
@@ -197,13 +196,11 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
   // Admin: drop the current character where the reticle (or camera) points.
   const placeHere = () => {
     const m = markerRef.current;
-    if (!m) return;
-    let world = hitRef.current;
-    if (!world && camPosRef.current && camFwdRef.current) {
-      const P = camPosRef.current, F = camFwdRef.current, d = 1.5;
-      world = [P[0] + F[0] * d, P[1] + F[1] * d, P[2] + F[2] * d];
-    }
-    if (!world) return;
+    const P = camPosRef.current;
+    const F = camFwdRef.current;
+    if (!m || !P || !F) return;
+    const d = 1.5; // drop the object 1.5 m in front of where the admin looks
+    const world: Vec3 = [P[0] + F[0] * d, P[1] + F[1] * d, P[2] + F[2] * d];
     const c = HUNT_CHARACTERS[placeIndex];
     localList.current = [...localList.current.filter((x) => x.id !== c.id), { id: c.id, pos: worldToLocal(world, m) }];
     setWorldObjs((prev) => [...prev.filter((x) => x.id !== c.id), { id: c.id, world: world as Vec3 }]);
@@ -258,7 +255,7 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
         <ViroARSceneNavigator
           autofocus
           initialScene={{ scene: HuntScene as any }}
-          viroAppProps={{ worldObjs, foundIds, isAdmin, onFound, onMarker, onFrame }}
+          viroAppProps={{ worldObjs, foundIds, isAdmin, onFound, onMarker, onCam }}
           style={styles.nav}
         />
       )}
