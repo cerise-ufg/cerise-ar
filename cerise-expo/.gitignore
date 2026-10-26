@@ -39,3 +39,10 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# CERISE: keystore de upload da Play Store e senhas (NUNCA versionar; fazer backup)
+keystore/
+upload.properties
+
+# Saidas de build locais
+build-out/

@@ -2,10 +2,11 @@
   "expo": {
     "name": "CERISE AR",
     "slug": "cerise-ar",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "backgroundColor": "#1A1020",
     "scheme": "cerisear",
     "runtimeVersion": {
       "policy": "appVersion"
@@ -19,16 +20,43 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "br.ufg.cerise.arviewer",
+      "buildNumber": "2",
+      "deploymentTarget": "17.6",
       "requireFullScreen": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "A câmera é usada para a experiência em realidade aumentada do CERISE AR.",
-        "ITSAppUsesNonExemptEncryption": false
+        "NSCameraUsageDescription": "A câmera é usada para a realidade aumentada e para fotografar objetos que viram modelos 3D.",
+        "NSPhotoLibraryUsageDescription": "Escolha uma foto da galeria para gerar um modelo 3D.",
+        "NSPhotoLibraryAddUsageDescription": "Permite salvar imagens criadas no CERISE AR na sua galeria.",
+        "NSMicrophoneUsageDescription": "O CERISE AR não grava áudio; esta permissão só é usada se você gravar vídeo da cena em RA.",
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": false,
+          "NSAllowsLocalNetworking": true
+        }
       }
     },
     "android": {
       "package": "com.cerisear",
+      "versionCode": 110,
       "permissions": [
-        "android.permission.CAMERA"
+        "android.permission.CAMERA",
+        "android.permission.INTERNET"
+      ],
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_MEDIA_AUDIO",
+        "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "com.google.android.gms.permission.AD_ID",
+        "android.permission.VIBRATE",
+        "android.permission.NFC",
+        "com.oculus.permission.EYE_TRACKING"
       ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
@@ -38,8 +66,44 @@
     },
     "plugins": [
       "expo-font",
-      "@reactvision/react-viro"
+      [
+        "@reactvision/react-viro",
+        {
+          "android": {
+            "xRMode": [
+              "AR"
+            ]
+          }
+        }
+      ],
+      "expo-asset",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Escolha uma foto da galeria para gerar um modelo 3D.",
+          "cameraPermission": "A câmera é usada para a realidade aumentada e para fotografar objetos que viram modelos 3D.",
+          "microphonePermission": false
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "buildArchs": [
+              "armeabi-v7a",
+              "arm64-v8a"
+            ]
+          }
+        }
+      ],
+      "./plugins/with-network-security",
+      "./plugins/with-upload-signing"
     ],
+    "extra": {
+      "viroEnabled": true,
+      "gen3dDefaultServer": "https://cerise.wenfur.com.br/gen3d",
+      "privacyPolicyUrl": "https://cerise.wenfur.com.br/privacidade.html"
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     }
