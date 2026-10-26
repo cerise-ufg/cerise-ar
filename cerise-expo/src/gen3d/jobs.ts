@@ -180,7 +180,8 @@ async function poll(id: string) {
     const n = (failures.get(id) || 0) + 1;
     failures.set(id, n);
     if (n >= MAX_NET_FAILURES) {
-      patch(id, { status: 'error', error: `${errorMessage(e)} (sem resposta após ${n} tentativas)` });
+      // resumable: o job continua no servidor; "Tentar de novo" so volta a acompanhar.
+      patch(id, { status: 'error', resumable: true, error: `${errorMessage(e)} (sem resposta após ${n} tentativas)` });
       failures.delete(id);
       return;
     }
@@ -281,11 +282,13 @@ export async function cancel(id: string): Promise<string> {
 export function retry(id: string) {
   const m = getModel(id);
   if (!m) return;
-  if (m.jobId && (m.status === 'error' || m.status === 'cancelled') && !/não encontrou|Tempo esgotado/.test(m.error || '')) {
-    patch(id, { status: 'queued', error: undefined, stage: 'reconectando…', createdAt: Date.now() - (m.timings?.uploadMs || 0) });
+  if (m.jobId && m.status === 'error' && m.resumable) {
+    patch(id, { status: 'queued', error: undefined, resumable: false, stage: 'reconectando…' });
     schedule(id, 100);
     return;
   }
+  // Cancelado, erro do servidor ou falha no envio: envia a foto de novo (novo job).
+  patch(id, { resumable: false });
   const mime = m.sourceUri?.endsWith('.png') ? 'image/png' : 'image/jpeg';
   patch(id, { server: getSettings().serverUrl });
   startUpload(id, mime);

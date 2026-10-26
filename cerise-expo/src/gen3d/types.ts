@@ -77,6 +77,8 @@ export type GeneratedModel = {
   position?: number;
   etaSeconds?: number;
   error?: string;
+  /** erro de rede durante o acompanhamento: o job segue no servidor e pode ser retomado */
+  resumable?: boolean;
   sourceUri?: string; // copia local da foto enviada
   glbUri?: string; // GLB baixado para o armazenamento do app
   thumbUri?: string; // miniatura baixada

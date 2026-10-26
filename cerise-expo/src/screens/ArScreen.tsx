@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
 import {
   Viro3DObject,
   ViroAmbientLight,
@@ -95,9 +95,16 @@ export default function ArScreen({
 
   useEffect(() => {
     let alive = true;
-    isARSupportedOnDevice()
-      .then((r) => alive && setSupported(!!r?.isARSupported))
-      .catch(() => alive && setSupported(null));
+    // O ARCore pode responder "verificando" na 1a consulta: tenta de novo antes de desistir.
+    const check = () => isARSupportedOnDevice().then((r) => !!r?.isARSupported).catch(() => false);
+    (async () => {
+      let ok = await check();
+      for (let i = 0; !ok && i < 2 && alive; i++) {
+        await new Promise((res) => setTimeout(res, 1500));
+        ok = await check();
+      }
+      if (alive) setSupported(ok);
+    })();
     return () => {
       alive = false;
     };
@@ -105,12 +112,20 @@ export default function ArScreen({
 
   return (
     <View style={styles.root}>
-      <ViroARSceneNavigator
-        autofocus
-        initialScene={{ scene: ArScene as any }}
-        viroAppProps={{ model, onTracking: setTracking, onLoad: setLoad }}
-        style={styles.nav}
-      />
+      {/* So monta a sessao de RA depois de confirmar suporte: em aparelho sem ARCore/ARKit
+          o Viro nao trata a falha de criacao da sessao e derruba o app. */}
+      {supported ? (
+        <ViroARSceneNavigator
+          autofocus
+          initialScene={{ scene: ArScene as any }}
+          viroAppProps={{ model, onTracking: setTracking, onLoad: setLoad }}
+          style={styles.nav}
+        />
+      ) : (
+        <View style={[styles.nav, styles.center]}>
+          {supported === null ? <ActivityIndicator color={Colors.cerise} size="large" /> : null}
+        </View>
+      )}
 
       {/* Overlay */}
       <View pointerEvents="box-none" style={styles.overlay}>
@@ -139,7 +154,11 @@ export default function ArScreen({
 
         <View style={styles.hintWrap} pointerEvents="none">
           <Text style={styles.hint}>
-            {load === 'error'
+            {supported === null
+              ? 'Verificando suporte a realidade aumentada…'
+              : supported === false
+                ? 'Realidade aumentada indisponível.'
+                : load === 'error'
               ? 'Não foi possível carregar este modelo na RA.'
               : load === 'loading'
                 ? 'Carregando o modelo…'
@@ -156,6 +175,7 @@ export default function ArScreen({
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.black },
   nav: { flex: 1 },
+  center: { alignItems: 'center', justifyContent: 'center' },
   overlay: {
     position: 'absolute',
     top: 0,

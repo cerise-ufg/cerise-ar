@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   Modal,
   Pressable,
   StyleSheet,
@@ -16,6 +17,7 @@ import {
   ViroNode,
   ViroSpotLight,
   ViroAnimations,
+  isARSupportedOnDevice,
 } from '@reactvision/react-viro';
 import { Colors, Radius, Space } from '../theme';
 import { HUNT_CHARACTERS, HUNT_TIME_SECONDS } from '../game';
@@ -240,7 +242,18 @@ export default function GameScreen({ onClose }: { onClose: () => void }) {
                   Você é o organizador: posicione os {total} personagens pelo espaço com
                   "Colocar aqui". Sua rodada NÃO conta no placar.
                 </Text>
-                <Pressable style={styles.cta} onPress={() => { setWorldObjs([]); setPlaceIndex(0); setPhase('placing'); }}>
+                <Pressable
+                  style={styles.cta}
+                  onPress={async () => {
+                    // Confere o suporte a RA antes de abrir a sessao (sem ARCore/ARKit o Viro derruba o app).
+                    const ok = await isARSupportedOnDevice().then((r) => !!r?.isARSupported).catch(() => false);
+                    if (!ok) {
+                      Alert.alert('RA indisponível', 'Este aparelho não tem ARCore/ARKit disponível, então a Caça CERISE não pode ser jogada aqui.');
+                      return;
+                    }
+                    setWorldObjs([]); setPlaceIndex(0); setPhase('placing');
+                  }}
+                >
                   <Text style={styles.ctaText}>Começar a posicionar</Text>
                 </Pressable>
               </>

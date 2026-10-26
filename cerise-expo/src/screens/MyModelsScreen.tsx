@@ -132,7 +132,7 @@ function Details({ m }: { m: GeneratedModel }) {
   if (local) {
     rows.push(['Malha', `${local.vertices} vértices · ${local.triangles} triângulos`]);
     rows.push(['Materiais', `${local.materials} material(is) · ${local.textures} textura(s)`]);
-    rows.push(['Tamanho', `${formatBytes(local.bytes)} · ${local.size.map((v: number) => v.toFixed(2)).join(' × ')} (unid.)`]);
+    rows.push(['Tamanho', `${formatBytes(local.bytes)} · ${local.size.map((v: number) => v.toFixed(2)).join(' × ')} m`]);
   }
   if (m.timings?.uploadMs !== undefined) rows.push(['Envio', `${(m.timings.uploadMs / 1000).toFixed(1)} s`]);
   if (m.timings?.queueMs !== undefined) rows.push(['Fila', `${(m.timings.queueMs / 1000).toFixed(1)} s`]);

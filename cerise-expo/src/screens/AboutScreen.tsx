@@ -56,7 +56,9 @@ export default function AboutScreen({ onBack }: { onBack: () => void }) {
           ))}
           <Text style={[st.h, { marginTop: Space.md }]}>Personagens da Caça CERISE</Text>
           {hunt.map((c) => (
-            <Text key={c.id} style={st.li}>• {c.author} ({c.license})</Text>
+            <Text key={c.id} style={st.li}>
+              • {c.author.includes(c.license) ? c.author : `${c.author} (${c.license === 'sample' ? 'modelo de exemplo do 8th Wall' : c.license})`}
+            </Text>
           ))}
         </Card>
 
