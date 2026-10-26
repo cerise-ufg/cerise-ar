@@ -10,8 +10,9 @@ export type ArModel = {
   title: string;
   subtitle: string;
   category: string;
-  model: number; // require(...) asset id
+  model: number | { uri: string }; // require(...) do catalogo ou arquivo gerado (file://)
   scaleToUnits: number;
+  generated?: boolean;
   animated: boolean;
   accent: string;
   author: string;
@@ -20,18 +21,16 @@ export type ArModel = {
 
 export const CAT_ALL = 'Todos';
 
+// Versao de loja (1.1.0): os modelos de franquias protegidas (Pikachu/Pokemon e a
+// figura Macross) sairam do catalogo para atender a politica de Propriedade
+// Intelectual do Google Play. Os arquivos continuam no repositorio, mas nao sao
+// mais referenciados (nao entram no bundle).
 export const MODELS: ArModel[] = [
   {
     id: 'robot', title: 'Robô Expressivo', subtitle: 'Modelo animado',
     category: 'Robótica', model: require('../assets/models/robot.glb'),
     scaleToUnits: 0.6, animated: true, accent: Colors.cerise,
     author: 'Tomás Laulhé / Don McCurdy', license: 'CC0',
-  },
-  {
-    id: 'pikachu', title: 'Pikachu', subtitle: 'Criatura · Pokémon',
-    category: 'Pokémon', model: require('../assets/models/pikachu.glb'),
-    scaleToUnits: 0.4, animated: false, accent: Colors.yellow,
-    author: 'Tipatat Chennavasin (Poly Pizza)', license: 'CC-BY',
   },
   {
     id: 'parrot', title: 'Arara', subtitle: 'Pássaro animado',
@@ -44,12 +43,6 @@ export const MODELS: ArModel[] = [
     category: 'Natureza', model: require('../assets/models/flower.glb'),
     scaleToUnits: 0.5, animated: false, accent: Colors.green,
     author: 'Christopher F (Poly Pizza)', license: 'CC-BY',
-  },
-  {
-    id: 'toy', title: 'Action Figure', subtitle: 'Colecionável · Macross',
-    category: 'Brinquedos', model: require('../assets/models/toy.glb'),
-    scaleToUnits: 0.5, animated: false, accent: Colors.orange,
-    author: 'Tipatat Chennavasin (Poly Pizza)', license: 'CC-BY',
   },
   {
     id: 'duck', title: 'Patinho', subtitle: 'Brinquedo clássico',
@@ -89,7 +82,18 @@ export function creditsText(): string {
   return (
     'Modelos 3D incluídos neste app e seus autores:\n\n' +
     lines +
-    '\n\nFontes e licenças: poly.pizza, Khronos glTF Sample Assets e three.js. ' +
+    '\n\nFontes e licenças: poly.pizza, Khronos glTF Sample Assets e three.js; personagens da Caça CERISE: Gobkit (CC0) e dançarino 8th Wall/Mixamo. ' +
     'Tipografia: Work Sans (OFL). Marca: CERISE / UFG.'
   );
 }
+
+/** Software de terceiros usado no app (tela Sobre > Licencas). */
+export const SOFTWARE_LICENSES: { name: string; license: string }[] = [
+  { name: 'React Native / React (Meta)', license: 'MIT' },
+  { name: 'Expo SDK 57 (expo-updates, expo-file-system, expo-image-picker...)', license: 'MIT' },
+  { name: 'ViroReact (ReactVision) — realidade aumentada', license: 'MIT' },
+  { name: '<model-viewer> (Google) — visualização 3D', license: 'Apache-2.0' },
+  { name: 'three.js (incluso no model-viewer)', license: 'MIT' },
+  { name: 'react-native-webview', license: 'MIT' },
+  { name: 'Work Sans (tipografia)', license: 'SIL OFL 1.1' },
+];

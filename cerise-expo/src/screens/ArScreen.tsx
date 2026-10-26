@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import {
   Viro3DObject,
@@ -10,6 +10,7 @@ import {
   ViroSpotLight,
   ViroAnimations,
   ViroTrackingStateConstants,
+  isARSupportedOnDevice,
 } from '@reactvision/react-viro';
 import { Colors, Radius, Space } from '../theme';
 import { ArModel } from '../catalog';
@@ -23,13 +24,18 @@ ViroAnimations.registerAnimations({
   },
 });
 
-/** The Viro AR scene: light rig + tap-a-plane to place the chosen GLB. */
+type SceneProps = {
+  model: ArModel;
+  onTracking?: (ok: boolean) => void;
+  onLoad?: (state: 'loading' | 'ok' | 'error') => void;
+};
+
+/** The Viro AR scene: light rig + tap-a-plane to place the chosen GLB (catalogo ou gerado). */
 function ArScene(props: any) {
-  const model: ArModel = props.sceneNavigator.viroAppProps.model;
-  const onTracking = props.sceneNavigator.viroAppProps.onTracking as
-    | ((ok: boolean) => void)
-    | undefined;
-  const s = model.scaleToUnits;
+  const { model, onTracking, onLoad } = props.sceneNavigator.viroAppProps as SceneProps;
+  const [mul, setMul] = useState(1); // escala ajustada por pinca
+  const [rotY, setRotY] = useState(0); // rotacao ajustada com dois dedos
+  const s = model.scaleToUnits * mul;
 
   return (
     <ViroARScene
@@ -47,13 +53,26 @@ function ArScene(props: any) {
         castsShadow
       />
       <ViroARPlaneSelector>
-        <ViroNode scale={[0.0001, 0.0001, 0.0001]} animation={{ name: 'popIn', run: true }}>
+        <ViroNode
+          scale={[0.0001, 0.0001, 0.0001]}
+          animation={{ name: 'popIn', run: true }}
+          onPinch={(state: number, factor: number) => {
+            if (state === 3) setMul((m) => Math.max(0.2, Math.min(6, m * factor)));
+          }}
+          onRotate={(state: number, factor: number) => {
+            if (state === 3) setRotY((r) => r - factor);
+          }}
+        >
           <Viro3DObject
-            source={model.model}
+            source={model.model as any}
             type="GLB"
             scale={[s, s, s]}
+            rotation={[0, rotY, 0]}
             dragType="FixedToWorld"
             onDrag={() => {}}
+            onLoadStart={() => onLoad?.('loading')}
+            onLoadEnd={() => onLoad?.('ok')}
+            onError={() => onLoad?.('error')}
           />
         </ViroNode>
       </ViroARPlaneSelector>
@@ -64,18 +83,32 @@ function ArScene(props: any) {
 export default function ArScreen({
   model,
   onClose,
+  onOpen3d,
 }: {
   model: ArModel;
   onClose: () => void;
+  onOpen3d?: () => void;
 }) {
   const [tracking, setTracking] = useState(false);
+  const [load, setLoad] = useState<'loading' | 'ok' | 'error' | null>(null);
+  const [supported, setSupported] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    isARSupportedOnDevice()
+      .then((r) => alive && setSupported(!!r?.isARSupported))
+      .catch(() => alive && setSupported(null));
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   return (
     <View style={styles.root}>
       <ViroARSceneNavigator
         autofocus
         initialScene={{ scene: ArScene as any }}
-        viroAppProps={{ model, onTracking: setTracking }}
+        viroAppProps={{ model, onTracking: setTracking, onLoad: setLoad }}
         style={styles.nav}
       />
 
@@ -86,15 +119,33 @@ export default function ArScreen({
             <Text style={styles.backText}>‹ Voltar</Text>
           </Pressable>
           <View style={[styles.pill, { backgroundColor: model.accent }]}>
-            <Text style={styles.pillText}>{model.title}</Text>
+            <Text style={styles.pillText} numberOfLines={1}>{model.title}</Text>
           </View>
         </View>
 
+        {supported === false ? (
+          <View style={styles.unsupported}>
+            <Text style={styles.unsupportedTitle}>RA indisponível neste aparelho</Text>
+            <Text style={styles.unsupportedText}>
+              O ARCore (Android) ou ARKit (iOS) não está disponível ou não foi instalado. Você ainda pode ver o modelo em 3D.
+            </Text>
+            {onOpen3d ? (
+              <Pressable style={styles.unsupportedBtn} onPress={onOpen3d}>
+                <Text style={styles.backText}>Ver em 3D</Text>
+              </Pressable>
+            ) : null}
+          </View>
+        ) : null}
+
         <View style={styles.hintWrap} pointerEvents="none">
           <Text style={styles.hint}>
-            {tracking
-              ? 'Toque numa superfície detectada para posicionar o modelo.'
-              : 'Mova o celular devagar para detectar superfícies…'}
+            {load === 'error'
+              ? 'Não foi possível carregar este modelo na RA.'
+              : load === 'loading'
+                ? 'Carregando o modelo…'
+                : tracking
+                  ? 'Toque numa superfície detectada para posicionar. Pinça = tamanho, dois dedos = girar.'
+                  : 'Mova o celular devagar para detectar superfícies…'}
           </Text>
         </View>
       </View>
@@ -119,6 +170,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: Space.xl,
     paddingHorizontal: Space.md,
+    gap: Space.sm,
   },
   backBtn: {
     backgroundColor: Colors.scrim,
@@ -127,8 +179,12 @@ const styles = StyleSheet.create({
     borderRadius: Radius.pill,
   },
   backText: { color: Colors.white, fontSize: 16, fontWeight: '700' },
-  pill: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: Radius.pill },
+  pill: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: Radius.pill, flexShrink: 1 },
   pillText: { color: Colors.white, fontWeight: '700' },
+  unsupported: { marginHorizontal: Space.lg, backgroundColor: 'rgba(26,16,32,0.92)', borderRadius: Radius.lg, padding: Space.lg, gap: Space.sm, borderWidth: 1, borderColor: Colors.cerise },
+  unsupportedTitle: { color: Colors.white, fontSize: 18, fontWeight: '800' },
+  unsupportedText: { color: '#CDB9C8' },
+  unsupportedBtn: { alignSelf: 'flex-start', backgroundColor: Colors.cerise, borderRadius: Radius.pill, paddingHorizontal: 18, paddingVertical: 10, marginTop: 4 },
   hintWrap: { alignItems: 'center', paddingBottom: Space.xl, paddingHorizontal: Space.lg },
   hint: {
     color: Colors.white,
