@@ -71,7 +71,7 @@ iPhone/TestFlight: ver `store/IOS_IPHONE_TESTFLIGHT.md` (precisa da sessão grá
 
 | Item | Valor |
 |---|---|
-| AAB release (ARM, assinado upload) | 55,2 MB · download estimado arm64/xxhdpi/API 29+: 35,6 MB (bundletool) |
+| AAB release (ARM, assinado upload) | 55,2 MB · download estimado (bundletool, API 29+): 35,7 MB arm64-v8a, 34,1 MB armeabi-v7a |
 | targetSdk / compileSdk / minSdk | 36 / 36 / 24 |
 | Permissões no APK final | CAMERA, INTERNET, ACCESS_NETWORK_STATE (+ permissão interna do AndroidX) |
 | Páginas de 16 KB | 30/30 `.so` de 64 bits com `PT_LOAD` ≥ 16 KB; `zipalign -c -P 16` OK |
