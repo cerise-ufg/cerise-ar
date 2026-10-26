@@ -5,7 +5,7 @@ Gera os recursos graficos da Play Store a partir dos assets do app:
   store/feature-graphic-1024x500.png (recurso grafico: paleta CERISE + emblema + print do app)
   store/screenshots/phone-*.png      (copias das capturas escolhidas, 1080x2400)
 
-Uso: python store/make-graphics.py <pasta evidencias/ do espelho (com android/ e android-real/)>
+Uso: python store/make-graphics.py <pasta evidencias/ com android/ e android-real/ (no repositorio: docs/relatorio-2026/evidencias)>
 """
 import os
 import shutil

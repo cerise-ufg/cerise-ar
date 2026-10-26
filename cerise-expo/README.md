@@ -61,7 +61,7 @@ no logcat) e conferidos com o estado do job no servidor:
 | Gato · Padrão, atrás de 1 job Alto de outro cliente | 0,40 s | 28,25 s | 15,81 s | 0,46 s | 44,9 s | 15,9 s (fila 27,9 s) | 662 KB |
 | Pato · Rápido, reenvio (cache do servidor) | 0,29 s | 0,28 s | 0 | 0,43 s | 1,0 s | — | 340 KB |
 
-Dados: `APP_CERISE_AR/resultados/real-tempos-app.csv` e `real-jobs-servidor.json` (espelho local).
+Dados: `docs/relatorio-2026/resultados/real-tempos-app.csv` e `real-jobs-servidor.json` (na raiz do repositório).
 
 ## Rodar o mock do servidor 3D
 
@@ -99,5 +99,5 @@ iPhone/TestFlight: ver `store/IOS_IPHONE_TESTFLIGHT.md` (precisa da sessão grá
 | Páginas de 16 KB | 30/30 `.so` de 64 bits com `PT_LOAD` ≥ 16 KB; `zipalign -c -P 16` OK |
 | Build Simulador iOS (Release, sem Viro) | `.app` de 41 MB, iPhone 17 Pro / iOS 26 |
 
-Detalhes, figuras e limitações: `E:\CERISE\FRENTES\REALIDADE AUMENTADA\APP_CERISE_AR\RELATORIO_SECAO.md`.
+Detalhes, figuras e limitações: `docs/relatorio-2026/RELATORIO_SECAO.md` (na raiz do repositório).
 Publicação: `store/PUBLICAR_PLAY_STORE.md`.

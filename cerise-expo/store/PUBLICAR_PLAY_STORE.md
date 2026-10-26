@@ -154,5 +154,5 @@ de permissões ou de `app.json` exigem novo AAB pela Play Store.
 
 ## Conformidade técnica verificada nesta versão
 
-Ver a seção "Adequação à Play Store" do `RELATORIO_SECAO.md` (targetSdk 36, permissões mínimas, 16 KB,
+Ver as Seções 3.2, 4.1 e 5 do `docs/relatorio-2026/RELATORIO_SECAO.md` (targetSdk 36, permissões mínimas, 16 KB,
 tamanho do AAB, assinatura, cleartext restrito, Photo Picker, sem AD_ID).
