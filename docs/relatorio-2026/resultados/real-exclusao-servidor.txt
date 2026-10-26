@@ -1,0 +1,10 @@
+# Exclusao no app -> DELETE no servidor real (26/10/2026, ~13:20 UTC; job do teste inicial, preset rapido)
+# antes de tocar em Excluir (Meus modelos):
+GET /api/v1/jobs/7968667fe63c46f0b07b7d19e9397bb1 -> HTTP 200
+# depois de confirmar 'Excluir' no app (build com remove() -> DELETE /api/v1/jobs/{id}):
+GET /api/v1/jobs/7968667fe63c46f0b07b7d19e9397bb1 -> HTTP 404 {"detail":"Job não encontrado (ou já apagado pela política de retenção de 7 dias)."}
+# no Spark:
+$ ls -d ~/cerise2026/gen3d/server/data/jobs/7968667fe63c46f0b07b7d19e9397bb1
+ls: impossível aceder a '.../data/jobs/7968667fe63c46f0b07b7d19e9397bb1': Ficheiro ou pasta inexistente
+$ curl -s localhost:8095/metrics | grep user_deleted
+gen3d_user_deleted_total 1.0

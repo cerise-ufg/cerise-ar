@@ -1,0 +1,16 @@
+
+Name                                               Length
+----                                               ------
+cerise-ar-1.1.0-110-emulador-legacypackaging.apk 48612619
+cerise-ar-1.1.0-110.aab                          55155542
+cerise-ar-1.1.0-110.apk                          83296083
+
+
+
+arquivo                                          Hash
+-------                                          ----
+cerise-ar-1.1.0-110.aab                          6D032174F19F254F8D3FDDF097B4B73C971CB49A5896B9E9CDA16EC9CB6D5F73
+cerise-ar-1.1.0-110-emulador-legacypackaging.apk F1113B09EE6109E99467588C238C808A1C6A15436D38CF06F1CF6F5070508065
+cerise-ar-1.1.0-110.apk                          A3DB5FD8BF08FD01B06FA7B4C28DBA226EBF6BA154910FBE6897D3C3B3B382A4
+
+

@@ -1,0 +1,8 @@
+{
+  "descricao": "Tamanhos medidos (bytes) dos artefatos Android do CERISE AR 1.1.0 (versionCode 110) em 26/10/2026. 'antes' = primeiro build desta versao com as 4 ABIs padrao do React Native (armeabi-v7a, arm64-v8a, x86, x86_64); 'final' = build com ABIs restritas as do ViroReact (armeabi-v7a, arm64-v8a). Download = bundletool 1.18.3 get-size total (MAX), API 29+.",
+  "antes_4_abis": {"aab": 75841899, "apk_universal": 116815617},
+  "final_2_abis": {"aab": 55155542, "apk_universal": 83296083, "apk_emulador_legacy_packaging": 48612619},
+  "download_play_api29": {"arm64-v8a": 35651915, "armeabi-v7a": 34086672},
+  "download_play_api24_28": {"arm64-v8a": 35553609, "armeabi-v7a": 33988366},
+  "fontes": ["artefatos-tamanhos.txt", "bundletool-get-size.csv", "saida do gradle build #1 (75.841.899 / 116.815.617 bytes)"]
+}

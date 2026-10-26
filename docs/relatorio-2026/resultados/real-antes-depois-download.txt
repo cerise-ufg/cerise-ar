@@ -1,0 +1,13 @@
+# Primeiro teste contra o servidor real com o APK de teste ANTERIOR (código da etapa app-base, 03:15 de 26/10/2026)
+# Burro (estatueta), preset Rápido + textura + remoção de fundo, foto burro-estatueta.jpg (1280x1280, 175 KB)
+# Tempos exibidos pelo app em Meus modelos > detalhes (evidencias/android-real/R00-antes-detalhes-build-anterior.png):
+Envio 1,5 s | Fila 1,4 s | Geração 10,1 s | Download 5,0 s | Total 18,0 s | GLB 398 KB (6.325 vértices, 10.000 triângulos, 0,30 x 0,29 x 0,19 m)
+# Log da API no Spark (docker logs cerise26_gen3d_api), mesmo job 7968667fe63c46f0b07b7d19e9397bb1:
+2026-10-26T13:06:19.823Z POST /api/v1/jobs 202 (1003.72 ms no servidor)
+2026-10-26T13:06:31.577Z GET  /api/v1/jobs/{job_id}/model.glb 200 (1.06 ms no servidor)
+2026-10-26T13:06:34.711Z GET  /api/v1/jobs/{job_id}/thumbnail.png 200 (1.2 ms no servidor)
+# -> 3,1 s entre o início do GLB e o da miniatura (download sequencial); o servidor responde em ~1 ms.
+# Causa provável no app: cada evento de progresso do download gravava models.json no disco e re-renderizava a lista.
+# Correção (src/gen3d/jobs.ts): progresso só em degraus de 10 % e sem gravar em disco; miniatura em paralelo.
+# Depois da correção, MESMA foto e preset (job 9fd846994a144975b3ee1c9065448366, GLB 398 KB):
+Envio 0,5 s | Fila 1,4 s | Geração 11,2 s | Download 0,45 s | Total 13,5 s   (fonte: real-tempos-app.csv)

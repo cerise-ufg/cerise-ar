@@ -1,0 +1,24 @@
+    viroEnabled: [33mfalse[39m,
+    testMode: [33mtrue[39m
+** BUILD SUCCEEDED **
+xcodebuild: 9 s
+/dev/disk3s1s1   228Gi    12Gi   8.2Gi    59%    455k   86M    1%   /
+REBUILD_DONE
+UDID=E6E6BF35-DD10-441F-8A77-CCE82DAFF725
+{"status":"ok","model":"mock (GLB de exemplo, sem IA)","gpu":"nenhuma (mock)","queue_length":0,"workers":1,"presets":["rapido","padrao","alto"]}
+installed
+shot 01-home 03:08:28 303337
+shot 02-criar-servidor-offline 03:08:36 279077
+shot 03-config-conexao-ok 03:08:44 323197
+{"job_id":"7c5125393242f101","status":"queued","position":1,"eta_seconds":26}
+shot 04-criar-foto 03:08:48 485875
+shot 05-fila 03:08:52 485863
+shot 06-gerando 03:09:17 491753
+shot 07-pronto 03:09:27 905375
+shot 08-meus-modelos 03:09:34 224279
+shot 09-visualizador-3d 03:09:47 1756299
+shot 10-visualizador-catalogo 03:10:01 1791252
+shot 11-sobre 03:10:07 362926
+shot 12-home-com-modelos 03:10:14 302088
+CAPTURE_DONE
+/Users/eduardocaixeta/CeriseAR/capture-ios.sh: line 19: 81507 Terminated: 15          nohup node tools/mock-gen3d-server.js --port 18096 > $ROOT/mock-ios.log 2>&1 < /dev/null

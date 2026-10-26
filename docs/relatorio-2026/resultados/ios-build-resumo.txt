@@ -1,0 +1,32 @@
+$ sw_vers; xcodebuild -version
+ProductName:		macOS
+ProductVersion:		26.3.1
+Xcode 26.6
+Build version 17F113
+
+$ bash build-ios-sim.sh   # CERISE_NO_VIRO=1 (resumo)
+=== 01:44:26 npm ci
+added 497 packages in 4s
+npm ci: 5 s
+=== 01:44:31 expo prebuild -p ios (CERISE_NO_VIRO=1)
+=== 01:44:32 pod install
+Pod installation complete! There are 100 dependencies from the Podfile and 100 total pods installed.
+pod install: 46 s
+workspace=ios/CERISEAR.xcworkspace scheme=CERISEAR
+=== 01:45:18 xcodebuild Release iphonesimulator
+** BUILD SUCCEEDED **
+xcodebuild: 72 s
+=== 01:46:30 fim
+
+$ du -sh CERISEAR.app; PlistBuddy Info.plist
+ 41M	build-sim-dd/Build/Products/Release-iphonesimulator/CERISEAR.app
+br.ufg.cerise.arviewer 1.1.0 2 17.6
+
+$ xcrun simctl list devices booted
+    iPhone 17 Pro (E6E6BF35-DD10-441F-8A77-CCE82DAFF725) (Booted) 
+
+$ xcrun simctl listapps booted | grep cerise
+    "br.ufg.cerise.arviewer" =     {
+        ApplicationType = User;
+        Bundle = "file:///Users/eduardocaixeta/Library/Developer/CoreSimulator/Devices/E6E6BF35-DD10-441F-8A77-CCE82DAFF725/data/Containers/Bundle/Application/9D2E9176-7B8D-492E-807D-BCA1A91F060A/CERISEAR.app/";
+        BundleContainer = "file:///Users/eduardocaixeta/Library/Developer/CoreSimulator/Devices/E6E6BF35-DD10-441F-8A77-CCE82DAFF725/data/Containers/Bundle/Application/9D2E9176-7B8D-492E-807D-BCA1A91F060A/";

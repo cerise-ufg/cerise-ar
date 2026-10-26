@@ -1,0 +1,7 @@
+hora_logcat_utc,objeto,cenario,preset,job_id,envio_s,fila_app_s,geracao_app_s,download_s,total_app_s,fila_servidor_s,execucao_servidor_s,gpu_pipeline_s,cache,glb_bytes,triangulos,textura,dims_m
+10-26 13:17:59.509,Pato de borracha,fila vazia,rapido,9033f74d7f5546abafd4f9846fd75fb3,0.408,1.248,11.189,0.673,13.519,0.24,11.199,11.2,False,348164,10000,image/jpeg,0.300x0.283x0.273
+10-26 13:20:00.943,Bule de prata,fila vazia,padrao,8f5e71a84fab4c4c918700eae9dd50ab,0.663,1.362,14.42,0.609,17.056,0.086,14.729,14.72,False,637016,19998,image/jpeg,0.300x0.234x0.158
+10-26 13:22:23.087,Gato (estatueta),fila vazia,alto,45ee03a9fb7546099c9cae7c1ba97a04,0.394,1.21,29.042,0.897,31.547,0.215,30.172,30.17,False,1514424,39998,image/jpeg,0.300x0.278x0.226
+10-26 13:22:47.666,Burro (estatueta),fila vazia,rapido,9fd846994a144975b3ee1c9065448366,0.49,1.352,11.239,0.453,13.536,0.203,11.263,11.26,False,407240,10000,image/jpeg,0.300x0.293x0.187
+10-26 13:26:09.652,Gato (estatueta),atrás de 1 job Alto de outro cliente,padrao,aae988cf77de4301a6d9caeb79a8523e,0.397,28.247,15.809,0.464,44.919,27.851,15.879,15.88,False,677632,19998,image/jpeg,0.300x0.278x0.225
+10-26 13:27:53.277,Pato de borracha,reenvio da mesma foto (cache),rapido,b4868ae4171e4cfebfd12e1eb0bcf64c,0.289,0.277,0.0,0.434,1.002,0.0,0.0,11.2,True,348164,10000,image/jpeg,0.300x0.283x0.273
