@@ -5,7 +5,7 @@ Gera os recursos graficos da Play Store a partir dos assets do app:
   store/feature-graphic-1024x500.png (recurso grafico: paleta CERISE + emblema + print do app)
   store/screenshots/phone-*.png      (copias das capturas escolhidas, 1080x2400)
 
-Uso: python store/make-graphics.py <pasta_com_capturas_do_emulador>
+Uso: python store/make-graphics.py <pasta evidencias/ do espelho (com android/ e android-real/)>
 """
 import os
 import shutil
@@ -24,14 +24,16 @@ CERISE = (198, 4, 99)
 CYAN = (120, 213, 239)
 WHITE = (255, 255, 255)
 
-# capturas usadas na ficha (sem resultados do mock, para nao sugerir geracao que nao ocorreu)
+# capturas usadas na ficha. As telas de geracao (2, 3 e 7) sao do teste ponta a ponta contra o
+# servidor 3D REAL (android-real/, 26/10/2026); nenhuma mostra o mock.
 SHOTS = [
-    ("A01-home.png", "phone-1-home.png"),
-    ("A06-criar-foto.png", "phone-2-criar-foto.png"),
-    ("A08-gerando.png", "phone-3-gerando.png"),
-    ("A15-visualizador-catalogo.png", "phone-4-visualizador-3d.png"),
-    ("A18-visualizador-capacete.png", "phone-5-visualizador-pbr.png"),
-    ("A16-sobre.png", "phone-6-sobre.png"),
+    ("android/A01-home.png", "phone-1-home.png"),
+    ("android-real/R05-pato-foto.png", "phone-2-criar-foto.png"),
+    ("android-real/R13b-bule-renderizando-vistas.png", "phone-3-gerando.png"),
+    ("android/A15-visualizador-catalogo.png", "phone-4-visualizador-3d.png"),
+    ("android/A18-visualizador-capacete.png", "phone-5-visualizador-pbr.png"),
+    ("android/A16-sobre.png", "phone-6-sobre.png"),
+    ("android-real/R11-pato-visualizador-3d.png", "phone-7-modelo-gerado.png"),
 ]
 
 
@@ -94,8 +96,8 @@ def feature_graphic(shots_dir):
     d.rounded_rectangle((66, 380, 330, 424), radius=22, fill=CERISE)
     d.text((88, 388), "CERISE · EMC · UFG", font=font(22, "SemiBold"), fill=WHITE)
 
-    p1 = phone(os.path.join(shots_dir, "A15-visualizador-catalogo.png"), 430)
-    p2 = phone(os.path.join(shots_dir, "A01-home.png"), 380)
+    p1 = phone(os.path.join(shots_dir, "android", "A15-visualizador-catalogo.png"), 430)
+    p2 = phone(os.path.join(shots_dir, "android", "A01-home.png"), 380)
     img.alpha_composite(p2, (W - p2.width - 190, 80))
     img.alpha_composite(p1, (W - p1.width - 30, 45))
     out = os.path.join(STORE, "feature-graphic-1024x500.png")

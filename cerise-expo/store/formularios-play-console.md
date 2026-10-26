@@ -13,7 +13,7 @@ Revise se o app mudar (principalmente rede, permissões e SDKs).
 |---|---|
 | O app coleta ou compartilha algum dos tipos de dados do usuário exigidos? | **Sim** (fotos enviadas para gerar 3D; apelido opcional no ranking do jogo) |
 | Todos os dados do usuário coletados pelo app são criptografados em trânsito? | **Sim** — produção usa apenas HTTPS (`https://cerise.wenfur.com.br/...`). O cleartext só é liberado para `10.0.2.2`/`localhost`/`127.0.0.1` (testes locais; `res/xml/network_security_config.xml`). |
-| Vocês oferecem uma forma de os usuários pedirem a exclusão dos dados? | **Sim** — por e-mail de contato (política de privacidade) e exclusão automática em até 7 dias. Modelos locais: botão *Excluir* no app. |
+| Vocês oferecem uma forma de os usuários pedirem a exclusão dos dados? | **Sim** — por e-mail de contato (política de privacidade) e exclusão automática em até 7 dias. Botão *Excluir* em *Meus modelos*: apaga o modelo do aparelho e pede ao servidor (`DELETE /api/v1/jobs/{id}`) que apague na hora a foto e o modelo de lá. |
 | O app usa SDKs de anúncios/analytics/crash de terceiros? | **Não** |
 
 **Tipos de dados declarados**

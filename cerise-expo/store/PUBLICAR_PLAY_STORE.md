@@ -5,11 +5,11 @@ e em `cerise-expo/build-out/`. Os passos marcados com 🔑 exigem o login do Edu
 
 | Item pronto | Onde |
 |---|---|
-| AAB assinado com a chave de **upload** (versão 1.1.0, versionCode 110, targetSdk 36) | `build-out/cerise-ar-1.1.0-110.aab` |
-| APK release (instalação direta / testes) | `build-out/cerise-ar-1.1.0-110.apk` |
+| AAB assinado com a chave de **upload** (versão 1.1.0, versionCode 110, targetSdk 36) — rebuild final de 26/10/2026 (~10:33), depois do teste ponta a ponta contra o servidor 3D real | `build-out/cerise-ar-1.1.0-110.aab` (55.157.760 bytes, SHA-256 `1dfba4b8…dcf9`) |
+| APK release (instalação direta / testes; mesma versão e mesmo bundle JS do AAB) | `build-out/cerise-ar-1.1.0-110.apk` (83.299.939 bytes, SHA-256 `dd65ae36…05e8`) |
 | Keystore de upload + senhas (FORA do git) | `keystore/cerise-upload.jks` + `keystore/upload.properties` |
 | Textos da ficha (nome, descrições, notas da versão) | `store/listing-pt-BR.md` (limites conferidos em `store/listing-check.json`) |
-| Ícone 512×512, recurso gráfico 1024×500, capturas | `store/icon-512.png`, `store/feature-graphic-1024x500.png`, `store/screenshots/` |
+| Ícone 512×512, recurso gráfico 1024×500, 7 capturas (2, 3 e 7 com o servidor 3D real; nenhuma com o mock) | `store/icon-512.png`, `store/feature-graphic-1024x500.png`, `store/screenshots/` |
 | Política de privacidade (pronta; **publicação pendente**, ver passo 0b) | URL: https://cerise.wenfur.com.br/privacidade.html · fonte: `store/privacidade.html` |
 | Respostas: Segurança dos dados, IARC, público-alvo, acesso ao app | `store/formularios-play-console.md` |
 
@@ -36,6 +36,38 @@ curl -I https://cerise.wenfur.com.br/privacidade.html   # deve responder 200 tex
 ```
 
 > Em 26/10/2026 a página ainda não havia sido publicada (a URL respondia 404); o passo ficou pendente.
+
+## 0c. (Pendente — decisão do Eduardo) Publicar o APK 1.1.0 para instalação direta
+
+Decisão de 26/10/2026: **nada foi publicado no wenfur**. O APK release final (mesmo código do AAB,
+assinado com a chave de upload, testado ponta a ponta contra o servidor 3D real) está em
+`build-out/cerise-ar-1.1.0-110.apk`. Para disponibilizá-lo por link direto, quando decidir:
+
+```powershell
+scp C:\Users\eduar\AndroidStudioProjects\CeriseAR\cerise-expo\build-out\cerise-ar-1.1.0-110.apk wenfur-root:/opt/cerise-ota/ota/cerise-ar-1.1.0.apk
+ssh wenfur-root "chmod 644 /opt/cerise-ota/ota/cerise-ar-1.1.0.apk && sha256sum /opt/cerise-ota/ota/cerise-ar-1.1.0.apk"
+curl.exe -sI https://cerise.wenfur.com.br/ota/cerise-ar-1.1.0.apk   # deve responder 200 e Content-Length igual ao arquivo local
+Get-FileHash C:\Users\eduar\AndroidStudioProjects\CeriseAR\cerise-expo\build-out\cerise-ar-1.1.0-110.apk -Algorithm SHA256   # conferir com o sha256sum acima
+```
+
+- **Não** altere `/opt/cerise-ota/ota/version.json`: ele é lido pelo app nativo antigo (1.0.0, `cerise-1.apk`) para
+  oferecer atualização; mudar o `apkUrl` ali empurraria a 1.1.0 para quem tem a versão antiga — decisão separada.
+- Em 26/10/2026 `https://cerise.wenfur.com.br/ota/cerise-ar-1.1.0.apk` respondia **404** (nada publicado) e
+  `https://cerise.wenfur.com.br/ota/cerise-1.apk` respondia 200 (APK antigo, 66 MB).
+- A geração 3D só funciona fora da rede interna depois que o servidor 3D for exposto (passo 7.1).
+- O APK é assinado com a chave de **upload**; com o Play App Signing, a versão da Play é assinada por outra
+  chave. Quem instalar pelo link direto não recebe atualização pela Play (precisa desinstalar antes).
+
+## 0d. Chave de API do servidor 3D (só se a exposição usar `GEN3D_API_KEYS`)
+
+O app envia o cabeçalho `X-API-Key` quando é compilado (ou publicado por OTA) com a variável
+`EXPO_PUBLIC_GEN3D_API_KEY` definida; sem ela, nenhum cabeçalho é enviado (caso deste AAB). A chave fica
+embutida no bundle JS — serve contra uso casual, junto com o *rate limit* do servidor, não como segredo forte.
+
+```powershell
+$env:EXPO_PUBLIC_GEN3D_API_KEY = '<a mesma chave de gen3d.secrets.env no Spark>'
+cd C:\cx\android; .\gradlew.bat :app:bundleRelease :app:assembleRelease
+```
 
 ## 1. 🔑 Conta de desenvolvedor
 
@@ -95,6 +127,10 @@ Use as respostas prontas de `store/formularios-play-console.md`:
 
 1. **Antes de enviar:** o servidor de geração 3D tem que estar publicado e respondendo em
    `https://cerise.wenfur.com.br/gen3d/api/v1/health` (senão o revisor verá "Servidor 3D não respondeu").
+   Em 26/10/2026 o servidor está pronto e foi validado ponta a ponta com este app, mas só é acessível pela
+   rede interna (encaminhamento SSH local); a **exposição pública é decisão pendente do Eduardo** — proposta,
+   riscos e passos em `cerise-2026-gen3d/server/README.md`. Conferência depois de expor:
+   `curl.exe -s https://cerise.wenfur.com.br/gen3d/api/v1/health` deve devolver `"status":"ok"`.
 2. *Produção → Criar nova versão* → promover a versão testada → países: Brasil (ou todos) → **Enviar para revisão**.
 3. A primeira revisão costuma levar de alguns dias a ~1 semana.
 

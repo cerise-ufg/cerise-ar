@@ -35,11 +35,33 @@ store/                   pacote da Play Store (textos, ícone, recurso gráfico,
 | POST | `/api/v1/jobs` (multipart `image` + `options` JSON) | envio da foto → `202 {job_id, position, eta_seconds}` |
 | GET | `/api/v1/jobs/{id}` | polling (1,5 s gerando · 2 s na fila · backoff em falha de rede) |
 | GET | `/api/v1/jobs/{id}/model.glb` · `/thumbnail.png` | download para `Documents/gen3d/models/<id>/` |
-| DELETE | `/api/v1/jobs/{id}` | cancelar enquanto está na fila |
+| DELETE | `/api/v1/jobs/{id}` | cancelar enquanto está na fila; ao **Excluir** em *Meus modelos*, apagar a foto e o modelo no servidor |
 
-URL padrão: `https://cerise.wenfur.com.br/gen3d` (produção planejada — **publicação pendente**).
+Detalhes do servidor real tratados pelo app: `202` com `status: "done"` (resultado vindo do cache do servidor),
+`/health` com `status` `ok | loading | paused | degraded` (fora de `ok` o app avisa que o pedido vai esperar na fila),
+`timings.queue_s/run_s` do job (mostrados em *Meus modelos → detalhes* ao lado dos tempos medidos no app) e
+cabeçalho opcional `X-API-Key` — enviado só quando o build/OTA é feito com `EXPO_PUBLIC_GEN3D_API_KEY` definida.
+
+URL padrão: `https://cerise.wenfur.com.br/gen3d` (produção planejada — **exposição pública do servidor pendente de decisão do Eduardo**).
 Para testes: emulador → `http://10.0.2.2:18095` (servidor real via `ssh -N -L 127.0.0.1:18095:localhost:8095 spark-bridge`)
 ou `http://10.0.2.2:18096` (mock); Simulador iOS → `http://localhost:18096`.
+
+### Validação ponta a ponta contra o servidor real (26/10/2026)
+
+Emulador Android 16 → encaminhamento SSH local → API real no DGX Spark (Hunyuan3D-2 Turbo, 1 worker, GPU GB10),
+fotos reais CC0 escolhidas pelo seletor de fotos do sistema. Tempos medidos pelo app (linha `[gen3d] modelo pronto`
+no logcat) e conferidos com o estado do job no servidor:
+
+| Objeto · preset | Envio | Fila | Geração | Download | Total | Execução no servidor | GLB |
+|---|---|---|---|---|---|---|---|
+| Pato de borracha · Rápido | 0,41 s | 1,25 s | 11,19 s | 0,67 s | 13,5 s | 11,2 s | 340 KB |
+| Burro (estatueta) · Rápido | 0,49 s | 1,35 s | 11,24 s | 0,45 s | 13,5 s | 11,3 s | 398 KB |
+| Bule de prata · Padrão | 0,66 s | 1,36 s | 14,42 s | 0,61 s | 17,1 s | 14,7 s | 622 KB |
+| Gato (estatueta) · Alto | 0,39 s | 1,21 s | 29,04 s | 0,90 s | 31,5 s | 30,2 s | 1,4 MB |
+| Gato · Padrão, atrás de 1 job Alto de outro cliente | 0,40 s | 28,25 s | 15,81 s | 0,46 s | 44,9 s | 15,9 s (fila 27,9 s) | 662 KB |
+| Pato · Rápido, reenvio (cache do servidor) | 0,29 s | 0,28 s | 0 | 0,43 s | 1,0 s | — | 340 KB |
+
+Dados: `APP_CERISE_AR/resultados/real-tempos-app.csv` e `real-jobs-servidor.json` (espelho local).
 
 ## Rodar o mock do servidor 3D
 
@@ -71,7 +93,7 @@ iPhone/TestFlight: ver `store/IOS_IPHONE_TESTFLIGHT.md` (precisa da sessão grá
 
 | Item | Valor |
 |---|---|
-| AAB release (ARM, assinado upload) | 55,2 MB · download estimado (bundletool, API 29+): 35,7 MB arm64-v8a, 34,1 MB armeabi-v7a |
+| AAB release (ARM, assinado upload) | 55,2 MB (55.157.760 bytes no rebuild final de 26/10, após o teste com o servidor real) · download estimado (bundletool, API 29+, build anterior): 35,7 MB arm64-v8a, 34,1 MB armeabi-v7a |
 | targetSdk / compileSdk / minSdk | 36 / 36 / 24 |
 | Permissões no APK final | CAMERA, INTERNET, ACCESS_NETWORK_STATE (+ permissão interna do AndroidX) |
 | Páginas de 16 KB | 30/30 `.so` de 64 bits com `PT_LOAD` ≥ 16 KB; `zipalign -c -P 16` OK |
