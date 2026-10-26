@@ -24,7 +24,7 @@ Nenhum arquivo passa de 1,9 GB, então não há partes a remontar.
 ## Como baixar e conferir
 
 ```bash
-gh release download v1.1.0 -R <organizacao>/cerise-ar          # ou v1.0.0; -p <arquivo> para um só
+gh release download v1.1.0 -R cerise-ufg/cerise-ar          # ou v1.0.0; -p <arquivo> para um só
 sha256sum cerise-ar-1.1.0-110.aab                              # comparar com a tabela
 ```
 
