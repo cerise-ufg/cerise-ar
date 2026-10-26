@@ -1,0 +1,26 @@
+[
+  {
+    "campo": "Nome do app",
+    "caracteres": 26,
+    "limite": 30,
+    "ok": true
+  },
+  {
+    "campo": "Descrição curta",
+    "caracteres": 69,
+    "limite": 80,
+    "ok": true
+  },
+  {
+    "campo": "Descrição completa",
+    "caracteres": 2251,
+    "limite": 4000,
+    "ok": true
+  },
+  {
+    "campo": "Notas da versão",
+    "caracteres": 397,
+    "limite": 500,
+    "ok": true
+  }
+]
