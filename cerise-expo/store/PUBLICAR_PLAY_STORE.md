@@ -35,7 +35,8 @@ ssh wenfur-root "chmod 644 /opt/cerise-ota/privacidade.html"
 curl -I https://cerise.wenfur.com.br/privacidade.html   # deve responder 200 text/html
 ```
 
-> Em 26/10/2026 a página ainda não havia sido publicada (a URL respondia 404); o passo ficou pendente.
+> Nesta execução automatizada a escrita no servidor de produção foi bloqueada pela política de
+> permissões do agente; por isso o passo ficou para o Eduardo (em 26/10/2026 a URL respondia 404).
 
 ## 0c. (Pendente — decisão do Eduardo) Publicar o APK 1.1.0 para instalação direta
 
