@@ -8,6 +8,13 @@ import { errorMessage, getHealth } from '../gen3d/api';
 import type { Health } from '../gen3d/types';
 
 type Props = { onBack: () => void; onOpenAbout: () => void; initialDraft?: string };
+const STATUS_PT: Record<string, string> = {
+  ok: 'pronto',
+  loading: 'carregando o modelo (pedidos esperam na fila)',
+  paused: 'em pausa (pedidos esperam na fila)',
+  degraded: 'sem worker de GPU ativo',
+};
+
 type Test = { kind: 'idle' } | { kind: 'testing' } | { kind: 'ok'; health: Health; ms: number; url: string } | { kind: 'fail'; msg: string; url: string };
 
 export default function SettingsScreen({ onBack, onOpenAbout, initialDraft }: Props) {
@@ -76,9 +83,9 @@ export default function SettingsScreen({ onBack, onOpenAbout, initialDraft }: Pr
 
           {test.kind === 'ok' ? (
             <Banner
-              tone="ok"
+              tone={test.health.status === 'ok' ? 'ok' : 'warn'}
               title={`Conectado em ${test.ms} ms`}
-              text={`${test.url}\nModelo: ${test.health.model}\nGPU: ${test.health.gpu}\nFila: ${test.health.queue_length} · workers: ${test.health.workers}\nPresets: ${test.health.presets?.join(', ')}`}
+              text={`${test.url}\nEstado: ${STATUS_PT[test.health.status] ?? test.health.status}\nModelo: ${test.health.model}\nGPU: ${test.health.gpu}\nFila: ${test.health.queue_length} · workers: ${test.health.workers}\nPresets: ${test.health.presets?.join(', ')}`}
             />
           ) : null}
           {test.kind === 'fail' ? (

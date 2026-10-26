@@ -150,7 +150,7 @@ export default function ViewerScreen({ title, subtitle, source, onBack, onOpenAr
         {subtitle ? <Text style={st.sub}>{subtitle}</Text> : null}
         {dims ? (
           <Text style={st.sub}>
-            Dimensões no arquivo: {dims.x.toFixed(2)} × {dims.y.toFixed(2)} × {dims.z.toFixed(2)} m · arraste para girar, pinça para zoom
+            Dimensões no arquivo: {[dims.x, dims.y, dims.z].map((v) => v.toFixed(2).replace('.', ',')).join(' × ')} m · arraste para girar, pinça para zoom
           </Text>
         ) : null}
         <View style={st.row}>

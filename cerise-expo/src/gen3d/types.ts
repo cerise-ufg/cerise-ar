@@ -17,7 +17,7 @@ export type JobOptions = {
   remove_background: boolean;
 };
 
-/** GET /api/v1/health */
+/** GET /api/v1/health (status: ok | loading | paused | degraded no servidor real) */
 export type Health = {
   status: string;
   model: string;
@@ -25,14 +25,19 @@ export type Health = {
   queue_length: number;
   workers: number;
   presets: string[];
+  running?: number;
+  version?: string;
+  retention_days?: number;
 };
 
-/** 202 de POST /api/v1/jobs */
+/** 202 de POST /api/v1/jobs ("done" quando a mesma foto+opcoes ja estava no cache do servidor) */
 export type JobCreated = {
   job_id: string;
-  status: 'queued';
+  status: 'queued' | 'done';
   position: number;
   eta_seconds: number;
+  cached?: boolean;
+  deduplicated?: boolean;
 };
 
 export type JobStatus = 'queued' | 'running' | 'done' | 'error' | 'cancelled';
@@ -51,6 +56,9 @@ export type JobState = {
     thumbnail_url: string;
     stats?: Record<string, unknown>;
   } | null;
+  cached?: boolean;
+  /** tempos medidos pelo servidor (s): espera na fila e execucao no worker de GPU */
+  timings?: { queue_s?: number | null; run_s?: number | null };
 };
 
 /** Estado local de um modelo gerado (persistido em models.json). */
@@ -84,7 +92,18 @@ export type GeneratedModel = {
   thumbUri?: string; // miniatura baixada
   glbBytes?: number;
   stats?: Record<string, unknown>;
-  timings?: { uploadMs?: number; queueMs?: number; generationMs?: number; downloadMs?: number; totalMs?: number };
+  /** Tempos medidos no app (resolucao do polling: 1,5-2 s) e, quando o servidor informa, os dele. */
+  timings?: {
+    uploadMs?: number;
+    queueMs?: number;
+    generationMs?: number;
+    downloadMs?: number;
+    totalMs?: number;
+    serverQueueMs?: number;
+    serverRunMs?: number;
+  };
+  /** resultado veio do cache do servidor (mesma foto e opcoes ja processadas) */
+  cached?: boolean;
 };
 
 export const ACTIVE_STATUSES: LocalStatus[] = ['uploading', 'queued', 'running', 'downloading'];

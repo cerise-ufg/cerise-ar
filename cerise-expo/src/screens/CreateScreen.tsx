@@ -8,7 +8,7 @@ import { Banner, Button, Card, Chip, ProgressBar, ScreenHeader, SOFT } from '../
 import { PRESETS, Preset, GeneratedModel, isActive } from '../gen3d/types';
 import { useSettings } from '../gen3d/settings';
 import { MAX_IMAGE_BYTES, errorMessage, getHealth } from '../gen3d/api';
-import { STATUS_LABEL, cancel, createFromPhoto, formatBytes, formatEta, retry, useModel } from '../gen3d/jobs';
+import { STATUS_LABEL, cancel, createFromPhoto, formatBytes, formatEta, formatMs, retry, useModel } from '../gen3d/jobs';
 
 type Props = {
   onBack: () => void;
@@ -24,7 +24,21 @@ type Props = {
 };
 
 type Photo = { uri: string; mimeType?: string; width?: number; height?: number; fileSize?: number };
-type ServerState = { kind: 'checking' } | { kind: 'ok'; text: string } | { kind: 'down'; text: string };
+type ServerState =
+  | { kind: 'checking' }
+  | { kind: 'ok'; text: string }
+  | { kind: 'busy'; title: string; text: string }
+  | { kind: 'down'; text: string };
+
+/** Estados do /health do servidor real alem de "ok" (o pedido e aceito, mas espera na fila). */
+const HEALTH_NOT_READY: Record<string, { title: string; text: string }> = {
+  loading: { title: 'Servidor 3D iniciando', text: 'O modelo de IA está carregando (cerca de 2 min). Pedidos enviados agora esperam na fila.' },
+  paused: { title: 'Servidor 3D em pausa', text: 'A geração está pausada pela equipe. Pedidos enviados agora esperam na fila.' },
+  degraded: { title: 'Servidor 3D sem GPU disponível', text: 'Nenhum worker de geração está ativo. Pedidos enviados agora esperam na fila.' },
+};
+
+/** "Hunyuan3D-2 Turbo (dit-v2-0-turbo + ...)" -> "Hunyuan3D-2 Turbo" */
+export const shortModelName = (m?: string) => (m || 'modelo 3D').split(' (')[0];
 
 export default function CreateScreen({ onBack, onOpenSettings, onOpenModels, onView3d, onViewAr, arAvailable, testPhotoUri, autoStart, initialPreset }: Props) {
   const { serverUrl } = useSettings();
@@ -42,7 +56,10 @@ export default function CreateScreen({ onBack, onOpenSettings, onOpenModels, onV
     try {
       const { health, ms } = await getHealth(serverUrl);
       const fila = health.queue_length === 1 ? '1 pedido na fila' : `${health.queue_length} pedidos na fila`;
-      setServer({ kind: 'ok', text: `${health.model} · ${fila} · ${ms} ms` });
+      const gpu = health.gpu && health.gpu !== 'desconhecida' ? ` · ${health.gpu}` : '';
+      const text = `${shortModelName(health.model)}${gpu} · ${fila} · ${ms} ms`;
+      const notReady = health.status !== 'ok' ? HEALTH_NOT_READY[health.status] ?? { title: `Servidor 3D: ${health.status}`, text: 'Pedidos enviados agora podem demorar.' } : null;
+      setServer(notReady ? { kind: 'busy', title: notReady.title, text: `${notReady.text}\n${text}` } : { kind: 'ok', text });
     } catch (e) {
       setServer({ kind: 'down', text: errorMessage(e) });
     }
@@ -135,6 +152,17 @@ export default function CreateScreen({ onBack, onOpenSettings, onOpenModels, onV
           />
         ) : server.kind === 'ok' ? (
           <Banner tone="ok" title="Servidor 3D online" text={server.text} />
+        ) : server.kind === 'busy' ? (
+          <Banner
+            tone="warn"
+            title={server.title}
+            text={server.text}
+            action={
+              <View style={st.row}>
+                <Button small variant="outline" color={Colors.orange} label="Verificar de novo" onPress={checkServer} />
+              </View>
+            }
+          />
         ) : (
           <Banner tone="info" title="Verificando o servidor 3D…" text={serverUrl} />
         )}
@@ -225,7 +253,8 @@ export function JobCard({
   else if (job.status === 'queued') line = `Posição ${job.position ?? '?'} na fila · ${formatEta(job.etaSeconds)}`;
   else if (job.status === 'running') line = `${job.stage || 'gerando'} · ${job.progress}% · ${formatEta(job.etaSeconds)}`;
   else if (job.status === 'downloading') line = `Baixando o modelo… ${job.progress}%`;
-  else if (job.status === 'ready') line = `Pronto · ${formatBytes(job.glbBytes)}${(job.stats as any)?.mock ? ' · servidor MOCK (GLB de exemplo)' : ''}`;
+  else if (job.status === 'ready')
+    line = `Pronto · ${formatBytes(job.glbBytes)}${(job.stats as any)?.mock ? ' · servidor MOCK (GLB de exemplo)' : job.cached ? ' · do cache do servidor' : ''}`;
   else if (job.status === 'cancelled') line = 'Cancelado';
   const local = (job.stats as any)?.local;
 
@@ -242,7 +271,7 @@ export function JobCard({
       {job.status === 'ready' && local ? (
         <Text style={st.meta}>
           {local.vertices?.toLocaleString?.('pt-BR') ?? local.vertices} vértices · {local.triangles?.toLocaleString?.('pt-BR') ?? local.triangles} triângulos · {local.textures} textura(s)
-          {job.timings?.totalMs ? ` · ${(job.timings.totalMs / 1000).toFixed(1)} s no total` : ''}
+          {job.timings?.totalMs ? ` · ${formatMs(job.timings.totalMs)} no total` : ''}
         </Text>
       ) : null}
       <View style={st.row}>

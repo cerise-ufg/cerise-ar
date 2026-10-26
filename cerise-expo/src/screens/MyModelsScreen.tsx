@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors, Radius, Space } from '../theme';
 import { Button, Card, ProgressBar, ScreenHeader, SOFT } from '../ui';
 import { GeneratedModel, PRESETS, isActive } from '../gen3d/types';
-import { STATUS_LABEL, cancel, formatBytes, formatEta, remove, rename, retry, useModels } from '../gen3d/jobs';
+import { STATUS_LABEL, cancel, fmtNum, formatBytes, formatEta, formatMs, remove, rename, retry, useModels } from '../gen3d/jobs';
 
 type Props = {
   onBack: () => void;
@@ -37,7 +37,7 @@ export default function MyModelsScreen({ onBack, onCreate, onView3d, onViewAr, a
   const current = selected ? models.find((m) => m.id === selected.id) ?? null : null;
 
   function confirmDelete(m: GeneratedModel) {
-    Alert.alert('Excluir modelo?', `"${m.title}" e seus arquivos serão apagados deste aparelho.`, [
+    Alert.alert('Excluir modelo?', `"${m.title}" e seus arquivos serão apagados deste aparelho, e o app pedirá ao servidor que apague a foto e o modelo dele também.`, [
       { text: 'Cancelar', style: 'cancel' },
       { text: 'Excluir', style: 'destructive', onPress: () => { setSelected(null); remove(m.id); } },
     ]);
@@ -126,18 +126,25 @@ export default function MyModelsScreen({ onBack, onCreate, onView3d, onViewAr, a
   );
 }
 
+const int = (v: unknown) => (typeof v === 'number' ? v.toLocaleString?.('pt-BR') ?? String(v) : String(v ?? '?'));
+
 function Details({ m }: { m: GeneratedModel }) {
   const local = (m.stats as any)?.local;
+  const t = m.timings || {};
   const rows: [string, string][] = [];
   if (local) {
-    rows.push(['Malha', `${local.vertices} vértices · ${local.triangles} triângulos`]);
+    rows.push(['Malha', `${int(local.vertices)} vértices · ${int(local.triangles)} triângulos`]);
     rows.push(['Materiais', `${local.materials} material(is) · ${local.textures} textura(s)`]);
-    rows.push(['Tamanho', `${formatBytes(local.bytes)} · ${local.size.map((v: number) => v.toFixed(2)).join(' × ')} m`]);
+    rows.push(['Tamanho', `${formatBytes(local.bytes)} · ${local.size.map((v: number) => fmtNum(v, 2)).join(' × ')} m`]);
   }
-  if (m.timings?.uploadMs !== undefined) rows.push(['Envio', `${(m.timings.uploadMs / 1000).toFixed(1)} s`]);
-  if (m.timings?.queueMs !== undefined) rows.push(['Fila', `${(m.timings.queueMs / 1000).toFixed(1)} s`]);
-  if (m.timings?.generationMs !== undefined) rows.push(['Geração', `${(m.timings.generationMs / 1000).toFixed(1)} s`]);
-  if (m.timings?.downloadMs !== undefined) rows.push(['Download', `${(m.timings.downloadMs / 1000).toFixed(1)} s`]);
+  if (t.uploadMs !== undefined) rows.push(['Envio', formatMs(t.uploadMs)]);
+  if (t.queueMs !== undefined) rows.push(['Fila', formatMs(t.queueMs)]);
+  if (t.generationMs !== undefined) rows.push(['Geração', formatMs(t.generationMs)]);
+  if (t.downloadMs !== undefined) rows.push(['Download', formatMs(t.downloadMs)]);
+  if (t.totalMs !== undefined) rows.push(['Total', formatMs(t.totalMs)]);
+  if (m.cached) rows.push(['No servidor', 'resultado do cache (mesma foto e opções)']);
+  else if (t.serverRunMs !== undefined)
+    rows.push(['No servidor', `fila ${formatMs(t.serverQueueMs ?? 0)} · GPU ${formatMs(t.serverRunMs)}`]);
   if ((m.stats as any)?.mock) rows.push(['Origem', 'servidor MOCK (GLB de exemplo)']);
   rows.push(['Servidor', m.server]);
   return (

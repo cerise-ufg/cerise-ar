@@ -18,6 +18,18 @@ export const REQUEST_TIMEOUT_MS = 15000;
 export const UPLOAD_TIMEOUT_MS = 180000;
 export const MAX_IMAGE_BYTES = 15 * 1024 * 1024;
 
+/**
+ * Chave opcional do servidor (cabecalho X-API-Key), exigida so quando o servidor publico tiver
+ * GEN3D_API_KEYS definido. Vem de EXPO_PUBLIC_GEN3D_API_KEY no momento do build/publicacao OTA
+ * (embutida no bundle JS; e uma barreira contra uso casual, nao um segredo forte). Sem a variavel,
+ * nenhum cabecalho e enviado (rede interna / testes).
+ */
+const API_KEY: string = (process.env.EXPO_PUBLIC_GEN3D_API_KEY || '').trim();
+
+export function apiHeaders(): Record<string, string> {
+  return API_KEY ? { 'X-API-Key': API_KEY } : {};
+}
+
 export function absUrl(base: string, rel: string): string {
   if (/^https?:\/\//i.test(rel)) return rel;
   return base.replace(/\/+$/, '') + (rel.startsWith('/') ? rel : '/' + rel);
@@ -40,7 +52,7 @@ async function request(url: string, init: RequestInit = {}, timeoutMs = REQUEST_
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    return await fetch(url, { ...init, signal: ctrl.signal, headers: { Accept: 'application/json', ...(init.headers || {}) } });
+    return await fetch(url, { ...init, signal: ctrl.signal, headers: { Accept: 'application/json', ...apiHeaders(), ...(init.headers || {}) } });
   } catch (e: any) {
     if (e?.name === 'AbortError') throw new ApiError(0, `O servidor não respondeu em ${Math.round(timeoutMs / 1000)} s.`);
     throw new ApiError(0, 'Sem conexão com o servidor. Verifique a internet e a URL em Configurações.');
@@ -73,6 +85,10 @@ export async function getJob(base: string, jobId: string): Promise<JobState> {
   return json<JobState>(res);
 }
 
+/**
+ * DELETE /api/v1/jobs/{id}: na fila, cancela o pedido; concluido (ou com erro), apaga a foto e o
+ * modelo do servidor. Em execucao o servidor responde 409 (retorna false).
+ */
 export async function cancelJob(base: string, jobId: string): Promise<boolean> {
   const res = await request(absUrl(base, `/api/v1/jobs/${encodeURIComponent(jobId)}`), { method: 'DELETE' });
   return res.ok;
@@ -95,6 +111,7 @@ export function uploadJob(
     xhr.open('POST', absUrl(base, '/api/v1/jobs'));
     xhr.timeout = UPLOAD_TIMEOUT_MS;
     xhr.setRequestHeader('Accept', 'application/json');
+    for (const [k, v] of Object.entries(apiHeaders())) xhr.setRequestHeader(k, v);
     if (xhr.upload) {
       xhr.upload.onprogress = (e: any) => {
         if (e?.lengthComputable && e.total > 0) onProgress?.(Math.min(1, e.loaded / e.total));

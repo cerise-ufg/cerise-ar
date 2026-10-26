@@ -1,5 +1,5 @@
 import { Directory, File } from 'expo-file-system';
-import { ApiError, absUrl, cancelJob, errorMessage, getJob, uploadJob } from './api';
+import { ApiError, absUrl, apiHeaders, cancelJob, errorMessage, getJob, uploadJob } from './api';
 import { readGlbInfo } from './glb';
 import { GEN3D_DIR, MODELS_DIR, createStore, ensureDirs, readJson, writeJson } from './persist';
 import { getSettings } from './settings';
@@ -27,9 +27,10 @@ function persist() {
   writeJson(DB, store.get());
 }
 
-function patch(id: string, p: Partial<GeneratedModel>) {
+/** Atualiza um modelo. save=false para estados transitorios (progresso de download), que nao precisam ir ao disco. */
+function patch(id: string, p: Partial<GeneratedModel>, save = true) {
   store.set(store.get().map((m) => (m.id === id ? { ...m, ...p, updatedAt: Date.now() } : m)));
-  persist();
+  if (save) persist();
 }
 
 export function getModels(): GeneratedModel[] {
@@ -72,6 +73,8 @@ export function initJobs() {
     if (m.status === 'uploading' || !m.jobId) {
       patch(m.id, { status: 'error', error: 'O envio foi interrompido (o app foi fechado). Toque em "Tentar de novo".' });
     } else {
+      // Download interrompido: volta a consultar o job (que ja esta pronto) e baixa de novo.
+      if (m.status === 'downloading') patch(m.id, { status: 'running', stage: 'retomando download' });
       schedule(m.id, 500);
     }
   }
@@ -142,16 +145,19 @@ function startUpload(id: string, mime: string) {
         cancelJob(m.server, created.job_id).catch(() => {});
         return;
       }
+      // status "done" no 202 = resultado ja estava no cache do servidor: busca o estado na hora.
+      const fromCache = created.status === 'done';
       patch(id, {
         jobId: created.job_id,
         status: 'queued',
         progress: 0,
         position: created.position,
         etaSeconds: created.eta_seconds,
-        stage: 'na fila',
+        stage: fromCache ? 'resultado em cache' : 'na fila',
+        cached: fromCache || undefined,
         timings: { uploadMs: Date.now() - t0 },
       });
-      schedule(id, 1000);
+      schedule(id, fromCache ? 50 : 1000);
     })
     .catch((e) => {
       uploads.delete(id);
@@ -202,7 +208,11 @@ async function poll(id: string) {
   } else if (st.status === 'done' && st.result) {
     if (m.status !== 'running' && timings.queueMs === undefined) timings.queueMs = Date.now() - m.createdAt - (timings.uploadMs || 0);
     timings.generationMs = Date.now() - m.createdAt - (timings.uploadMs || 0) - (timings.queueMs || 0);
-    patch(id, { status: 'downloading', progress: 0, stage: 'baixando modelo', stats: st.result.stats, timings });
+    // Tempos do proprio servidor (sem a resolucao do polling), quando informados.
+    if (typeof st.timings?.queue_s === 'number') timings.serverQueueMs = Math.round(st.timings.queue_s * 1000);
+    if (typeof st.timings?.run_s === 'number') timings.serverRunMs = Math.round(st.timings.run_s * 1000);
+    const cached = !!(st.cached || (st.result.stats as any)?.cached || m.cached);
+    patch(id, { status: 'downloading', progress: 0, stage: 'baixando modelo', stats: st.result.stats, timings, cached: cached || undefined });
     download(id, st.result.glb_url, st.result.thumbnail_url);
   } else if (st.status === 'error') {
     patch(id, { status: 'error', error: st.error || 'O servidor não conseguiu gerar o modelo.' });
@@ -220,27 +230,42 @@ async function download(id: string, glbUrl: string, thumbUrl?: string) {
   const dir = modelDir(id);
   try {
     dir.create({ intermediates: true, idempotent: true });
+    const headers = apiHeaders();
+    // Miniatura em paralelo com o GLB (falha nela nao impede o modelo: usa a foto).
+    const thumbP: Promise<string | undefined> = thumbUrl
+      ? File.downloadFileAsync(absUrl(m.server, thumbUrl), new File(dir, 'thumbnail.png'), { idempotent: true, headers })
+          .then((f) => f.uri)
+          .catch((e) => {
+            console.warn('[gen3d] miniatura indisponivel, usando a foto', e);
+            return undefined;
+          })
+      : Promise.resolve(undefined);
+    // Progresso so em degraus de 10 % e sem gravar no disco. No teste contra o servidor real, com
+    // models.json gravado a cada evento de progresso e a miniatura baixada depois do GLB, o download de
+    // um GLB de 398 KB levou 5,0 s no emulador; com esta versao, 0,45 s (mesma foto e preset).
+    let lastStep = -1;
     const glb = await File.downloadFileAsync(absUrl(m.server, glbUrl), new File(dir, 'model.glb'), {
       idempotent: true,
+      headers,
       onProgress: (p: { bytesWritten: number; totalBytes: number }) => {
         if (p.totalBytes > 0) {
-          const pct = Math.round((100 * p.bytesWritten) / p.totalBytes);
-          if (pct % 10 === 0) patch(id, { progress: pct });
+          const step = Math.floor((10 * p.bytesWritten) / p.totalBytes);
+          if (step !== lastStep) {
+            lastStep = step;
+            patch(id, { progress: step * 10 }, false);
+          }
         }
       },
     });
-    let thumbUri = m.sourceUri;
-    if (thumbUrl) {
-      try {
-        const thumb = await File.downloadFileAsync(absUrl(m.server, thumbUrl), new File(dir, 'thumbnail.png'), { idempotent: true });
-        thumbUri = thumb.uri;
-      } catch (e) {
-        console.warn('[gen3d] miniatura indisponivel, usando a foto', e);
-      }
-    }
+    const thumbUri = (await thumbP) ?? m.sourceUri;
     const info = readGlbInfo(glb.uri);
     const timings = { ...(getModel(id)?.timings || {}), downloadMs: Date.now() - t0 };
     timings.totalMs = Date.now() - (getModel(id)?.createdAt || t0);
+    // Linha de metrica no logcat/console (sem dados pessoais): usada nos testes ponta a ponta.
+    console.log(
+      '[gen3d] modelo pronto ' +
+        JSON.stringify({ job: m.jobId, options: m.options, timings, glb_bytes: info?.bytes ?? glb.size, cached: !!getModel(id)?.cached }),
+    );
     patch(id, {
       status: 'ready',
       progress: 100,
@@ -298,10 +323,17 @@ export function rename(id: string, title: string) {
   if (title.trim()) patch(id, { title: title.trim().slice(0, 60) });
 }
 
+/**
+ * Exclui o modelo do aparelho e pede ao servidor (DELETE, melhor esforco) que apague a foto e o
+ * modelo dele tambem — sem esperar os 7 dias da retencao. Se o servidor estiver fora do ar, a
+ * retencao automatica apaga depois.
+ */
 export function remove(id: string) {
+  const m = getModel(id);
   stop(id);
   uploads.get(id)?.();
   uploads.delete(id);
+  if (m?.jobId && m.server) cancelJob(m.server, m.jobId).catch(() => {});
   try {
     const dir = modelDir(id);
     if (dir.exists) dir.delete();
@@ -329,8 +361,20 @@ export function formatEta(s?: number): string {
   return `~${Math.floor(v / 60)} min ${pad(v % 60)} s`;
 }
 
+/** Numero com virgula decimal (pt-BR), sem depender de Intl. */
+export function fmtNum(v: number, digits = 1): string {
+  return v.toFixed(digits).replace('.', ',');
+}
+
+/** Milissegundos -> "12,3 s" (ou "45 ms" abaixo de 0,1 s). */
+export function formatMs(ms?: number): string {
+  if (ms === undefined || ms === null || !Number.isFinite(ms)) return '';
+  if (ms < 100) return `${Math.max(0, Math.round(ms))} ms`;
+  return `${fmtNum(ms / 1000)} s`;
+}
+
 export function formatBytes(n?: number): string {
   if (!n) return '';
   if (n < 1024 * 1024) return `${(n / 1024).toFixed(0)} KB`;
-  return `${(n / 1024 / 1024).toFixed(1)} MB`;
+  return `${fmtNum(n / 1024 / 1024)} MB`;
 }
