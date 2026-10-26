@@ -1,0 +1,13 @@
+activity com.canhub.cropper.CropImageActivity exported=false
+activity com.cerisear.MainActivity exported=true
+activity com.google.android.gms.common.api.GoogleApiActivity exported=false
+activity com.google.ar.core.InstallActivity exported=false
+activity expo.modules.imagepicker.ExpoCropImageActivity exported=false
+provider androidx.startup.InitializationProvider exported=false
+provider com.canhub.cropper.CropFileProvider exported=false
+provider com.reactnativecommunity.webview.RNCWebViewFileProvider exported=false
+provider expo.modules.filesystem.FileSystemFileProvider exported=false
+provider expo.modules.imagepicker.fileprovider.ImagePickerFileProvider exported=false
+receiver androidx.profileinstaller.ProfileInstallReceiver exported=true
+service androidx.room.MultiInstanceInvalidationService exported=false
+service com.google.android.gms.metadata.ModuleDependencies exported=false

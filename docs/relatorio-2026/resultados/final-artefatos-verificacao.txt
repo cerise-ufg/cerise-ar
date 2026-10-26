@@ -1,0 +1,26 @@
+# Artefatos finais (rebuild de 26/10/2026 ~10:33 BRT, apos o teste ponta a ponta contra o servidor real)
+cerise-ar-1.1.0-110-emulador-legacypackaging.apk  48616475 bytes  sha256 c0ff8d2d9f98c57a470b5188f8cf1981caf5ec72463bcf71b0bb9bf146c132b4
+cerise-ar-1.1.0-110.aab  55157760 bytes  sha256 1dfba4b8c321b352afb4c072aea1608dc9ed49e6dbecb402df6b8baf5cdedcf9
+cerise-ar-1.1.0-110.apk  83299939 bytes  sha256 dd65ae362cbd3a4623e0eb304fda7f86b54df0a184f12630e169e86528ce05e8
+
+## apksigner verify --print-certs cerise-ar-1.1.0-110.apk
+Signer #1 certificate DN: CN=CERISE AR Upload, OU=CERISE EMC, O=Universidade Federal de Goias, L=Goiania, ST=GO, C=BR
+Signer #1 certificate SHA-256 digest: c7e8466a27af507e6e15923a2655295705301568afb7edf39828fd1864f1b6d9
+## jarsigner -verify cerise-ar-1.1.0-110.aab
+jar verified.
+
+## aapt2 dump badging (resumo)
+package: name='com.cerisear' versionCode='110' versionName='1.1.0' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+minSdkVersion:'24'
+targetSdkVersion:'36'
+uses-permission: name='android.permission.CAMERA'
+uses-permission: name='android.permission.CAMERA'
+uses-permission: name='android.permission.INTERNET'
+uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
+uses-permission: name='com.cerisear.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+## zipalign -c -P 16 -v 4 cerise-ar-1.1.0-110.apk
+Verification successful
+## bundle JS identico nos 3 artefatos (Hermes)
+cerise-ar-1.1.0-110.apk assets/index.android.bundle 1709332 bytes sha256 20f68b20a4585327 {'Servidor 3D iniciando': True, 'No servidor': True, 'modelo pronto': True, 'retomando download': True, 'Verificar de novo': True}
+cerise-ar-1.1.0-110.aab base/assets/index.android.bundle 1709332 bytes sha256 20f68b20a4585327 {'Servidor 3D iniciando': True, 'No servidor': True, 'modelo pronto': True, 'retomando download': True, 'Verificar de novo': True}
+cerise-ar-1.1.0-110-emulador-legacypackaging.apk assets/index.android.bundle 1709332 bytes sha256 20f68b20a4585327 {'Servidor 3D iniciando': True, 'No servidor': True, 'modelo pronto': True, 'retomando download': True, 'Verificar de novo': True}

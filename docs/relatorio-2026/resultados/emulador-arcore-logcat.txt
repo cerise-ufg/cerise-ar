@@ -1,0 +1,121 @@
+10-26 06:00:32.640 10351 10351 I Viro    : ARCore installed on device
+10-26 06:00:32.706 10351 10351 I third_party/arcore/ar/core/android/sdk/session_create.cc: Entering ArSession_create
+10-26 06:00:32.707 10351 10351 I third_party/arcore/ar/core/android/sdk/session_create.cc: ARCore Version: SDK build name: 1.51
+10-26 06:00:32.721 10351 10351 I third_party/arcore/ar/core/android/sdk/session_create.cc: ARCore Version: APK version code: 262640093
+10-26 06:00:32.782 10351 10351 I third_party/arcore/ar/core/android/sdk/session_create.cc: Dynamite load ok.
+10-26 06:00:32.783 10351 10351 I third_party/arcore/java/com/google/vr/dynamite/client/native/dynamite_client.cc: Attempting to load native library arcore_c from package com.google.ar.core
+10-26 06:00:32.908 10351 10351 D nativeloader: Load /data/app/~~bjMRvnkSiI6ozdWeU8XJYw==/com.google.ar.core-lzsTX4sBfwHnDoIeqPge0g==/lib/x86_64/libarcore_c.so using class loader ns clns-11 (caller=/data/app/~~bjMRvnkSiI6ozdWeU8XJYw==/com.google.ar.core-lzsTX4sBfwHnDoIeqPge0g==/base.apk!classes2.dex)
+10-26 06:00:32.910 10351 10351 I third_party/arcore/java/com/google/vr/dynamite/client/native/dynamite_client.cc: Dynamite::LoadNativeRemoteLibrary handle=-17418306674388371
+10-26 06:00:32.915 10351 10351 I third_party/arcore/ar/core/android/sdk/session_create.cc: ARCore SDK: dynamite number_of_symbols_loaded=0
+10-26 06:00:32.915 10351 10351 E third_party/arcore/ar/core/android/sdk/session_create.cc: ARCore SDK: failed to load symbols
+10-26 06:00:32.915 10351 10351 E third_party/arcore/ar/core/android/sdk/session_create.cc: LoadSymbolsDynamite returning AR_ERROR_FATAL.
+10-26 06:00:32.915 10351 10351 E third_party/arcore/ar/core/android/sdk/session_create.cc: LoadSymbols returning status.
+10-26 06:00:33.828 10351 10351 F libc    : Fatal signal 11 (SIGSEGV), code 2 (SEGV_ACCERR), fault addr 0x0 in tid 10351 (com.cerisear), pid 10351 (com.cerisear)
+10-26 06:00:34.643 13758 13758 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+10-26 06:00:34.643 13758 13758 F DEBUG   : Build fingerprint: 'google/sdk_gphone64_x86_64/emu64xa:16/BE2A.250530.026.D1/13818094:user/release-keys'
+10-26 06:00:34.643 13758 13758 F DEBUG   : Revision: '0'
+10-26 06:00:34.643 13758 13758 F DEBUG   : ABI: 'x86_64'
+10-26 06:00:34.643 13758 13758 F DEBUG   : Guest architecture: 'arm64'
+10-26 06:00:34.643 13758 13758 F DEBUG   : Timestamp: 2026-10-26 06:00:34.010755600+0000
+10-26 06:00:34.643 13758 13758 F DEBUG   : Process uptime: 554s
+10-26 06:00:34.643 13758 13758 F DEBUG   : Cmdline: com.cerisear
+10-26 06:00:34.643 13758 13758 F DEBUG   : pid: 10351, tid: 10351, name: com.cerisear  >>> com.cerisear <<<
+10-26 06:00:34.643 13758 13758 F DEBUG   : uid: 10221
+10-26 06:00:34.643 13758 13758 F DEBUG   : signal 11 (SIGSEGV), code 2 (SEGV_ACCERR), fault addr 0x0000000000000000
+10-26 06:00:34.644 13758 13758 F DEBUG   :     rax 0000000000000000  rbx 00007af36c7e9000  rcx 00007af368b58808  rdx 000000000000000b
+10-26 06:00:34.644 13758 13758 F DEBUG   :     r8  000000000000000b  r9  000000000000000b  r10 00007ffe511329e0  r11 0000000000000246
+10-26 06:00:34.644 13758 13758 F DEBUG   :     r12 00007af36c7a00f8  r13 0000000000000000  r14 0000000048637301  r15 000000000000286f
+10-26 06:00:34.644 13758 13758 F DEBUG   :     rdi 000000000000286f  rsi 000000000000286f
+10-26 06:00:34.644 13758 13758 F DEBUG   :     rbp 00007ffe51132a80  rsp 00007ffe511329d8  rip 00007af368b58808
+10-26 06:00:34.644 13758 13758 F DEBUG   : 6 total frames
+10-26 06:00:34.644 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.644 13758 13758 F DEBUG   :       #00 pc 000000000008f808  /apex/com.android.runtime/lib64/bionic/libc.so (syscall+24) (BuildId: fcb82240218d1473de1e3d2137c0be35)
+10-26 06:00:34.644 13758 13758 F DEBUG   :       #01 pc 00000000003556d5  /system/lib64/libndk_translation.so (berberis_HandleNoExec+229) (BuildId: 2810e5b44895c4ea0b1ad6882ea73b73)
+10-26 06:00:34.644 13758 13758 F DEBUG   :       #02 pc 000000000035534c  /system/lib64/libndk_translation.so (berberis::ExecuteGuest(berberis::ThreadState*)+236) (BuildId: 2810e5b44895c4ea0b1ad6882ea73b73)
+10-26 06:00:34.644 13758 13758 F DEBUG   :       #03 pc 0000000000355507  /system/lib64/libndk_translation.so (berberis::ExecuteGuestCall(berberis::ThreadState*)+119) (BuildId: 2810e5b44895c4ea0b1ad6882ea73b73)
+10-26 06:00:34.644 13758 13758 F DEBUG   :       #04 pc 00000000003558a3  /system/lib64/libndk_translation.so (berberis::RunGuestCall(unsigned long, berberis::GuestArgumentBuffer*)+195) (BuildId: 2810e5b44895c4ea0b1ad6882ea73b73)
+10-26 06:00:34.644 13758 13758 F DEBUG   :       #05 pc 000000000000ecd3  /memfd:exec (deleted)
+10-26 06:00:34.652 13758 13758 F DEBUG   :     x0  00544c555345525f  x1  00007af015a28f30  x2  0000000000000000  x3  5241002e73757461
+10-26 06:00:34.652 13758 13758 F DEBUG   :     x4  0000000000000028  x5  0000800000000000  x6  0000000000000010  x7  7f7f7f7f7f7f7f7f
+10-26 06:00:34.652 13758 13758 F DEBUG   :     x8  00007af08c871290  x9  19454de134589d43  x10 0000000000000000  x11 0000000000000000
+10-26 06:00:34.652 13758 13758 F DEBUG   :     x12 0000000000000063  x13 0000000000000007  x14 0000000000000010  x15 00007af01105c984
+10-26 06:00:34.652 13758 13758 F DEBUG   :     x16 00007af006371420  x17 00007af08c8697f8  x18 000000003d34e333  x19 00007af21ab4d8b0
+10-26 06:00:34.652 13758 13758 F DEBUG   :     x20 00007ffe51132d3c  x21 00007af0eab210e0  x22 0000000000000000  x23 0000000000000000
+10-26 06:00:34.652 13758 13758 F DEBUG   :     x24 0000000000000000  x25 0000000000000000  x26 00007af36c55c040  x27 0000000000000000
+10-26 06:00:34.652 13758 13758 F DEBUG   :     x28 0000000000000000  x29 00007af015a28f40  lr  00007af00633b6d4  sp  00007af015a28f10
+10-26 06:00:34.652 13758 13758 F DEBUG   :     pc  0000000000000000  pst 0000000000000000
+10-26 06:00:34.652 13758 13758 F DEBUG   :   
+10-26 06:00:34.652 13758 13758 F DEBUG   : 4 total frames
+10-26 06:00:34.652 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.652 13758 13758 F DEBUG   :       #00 pc 0000000000000000  <unknown>
+10-26 06:00:34.652 13758 13758 F DEBUG   :       #01 pc 00000000000306d0  /data/app/~~_0GLZBvjnYgefqf1qB2Slg==/com.cerisear-tuFUKAOxKB8BW2f-fVufhg==/lib/arm64/libviro_arcore.so (arcore::SessionNative::SessionNative(void*, _JNIEnv*)+92) (BuildId: 8565c0bba1ae9cca2024c6a3ec9b8e0bd003a916)
+10-26 06:00:34.652 13758 13758 F DEBUG   :       #02 pc 0000000000032458  /data/app/~~_0GLZBvjnYgefqf1qB2Slg==/com.cerisear-tuFUKAOxKB8BW2f-fVufhg==/lib/arm64/libviro_arcore.so (Java_com_viro_core_RendererARCore_nativeCreateARCoreSession+44) (BuildId: 8565c0bba1ae9cca2024c6a3ec9b8e0bd003a916)
+10-26 06:00:34.653 13758 13758 F DEBUG   :       #03 pc 0000000000008018  /system/lib64/arm64/libnative_bridge_vdso.so (BuildId: 5082e3064230f41f0158350ba172b967)
+10-26 06:00:34.653 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.653 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.653 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.653 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.654 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.654 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.654 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.654 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.654 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.654 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.654 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.654 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.654 13758 13758 F DEBUG   : 6 total frames
+10-26 06:00:34.654 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.654 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.654 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.655 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.655 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.655 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.655 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.655 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.655 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.655 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.655 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.655 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.655 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.655 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.656 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.656 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.656 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.657 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.657 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.657 13758 13758 F DEBUG   : 1 total frames
+10-26 06:00:34.657 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.657 13758 13758 F DEBUG   : 10 total frames
+10-26 06:00:34.657 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.657 13758 13758 F DEBUG   : 10 total frames
+10-26 06:00:34.657 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.657 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.657 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.657 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.657 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.657 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.657 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.658 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.658 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.658 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.658 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.658 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.658 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.658 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.659 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.659 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.659 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.659 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.659 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.659 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.659 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.659 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.659 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.659 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.659 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.659 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.659 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.660 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.660 13758 13758 F DEBUG   : backtrace:
+10-26 06:00:34.660 13758 13758 F DEBUG   : 8 total frames
+10-26 06:00:34.660 13758 13758 F DEBUG   : backtrace:

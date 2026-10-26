@@ -1,0 +1,6 @@
+    viroEnabled: [33mfalse[39m,
+    testMode: [33mtrue[39m
+** BUILD SUCCEEDED **
+xcodebuild: 9 s
+/dev/disk3s1s1   228Gi    12Gi    10Gi    54%    455k  106M    0%   /
+REBUILD_DONE

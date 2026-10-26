@@ -1,0 +1,985 @@
+[
+  {
+    "arquivo": "cerise-ar-1.1.0-110.aab",
+    "bibliotecas": [
+      {
+        "abi": "arm64-v8a",
+        "lib": "libBulletCollision.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libBulletDynamics.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libBulletSoftBody.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libLinearMath.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libappmodules.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libarcore_sdk_c.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libarcore_sdk_jni.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libc++_shared.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libexpo-modules-core.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libexpo-updates.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libfbjni.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libfreetype.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libfreetyped.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libgifimage.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libgvr.so",
+        "bits": 64,
+        "p_align_min": 65536,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libgvr_audio.so",
+        "bits": 64,
+        "p_align_min": 65536,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libhermestooling.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libhermesvm.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libimagepipeline.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libjsi.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libnative-filters.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libnative-imagetranscoder.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libopenxr_loader.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libreact_codegen_safeareacontext.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libreactnative.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libreactvisioncca.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libstatic-webp.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libviro_arcore.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libviro_renderer.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libzstd-kmp.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libBulletCollision.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libBulletDynamics.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libBulletSoftBody.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libLinearMath.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libappmodules.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libarcore_sdk_c.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libarcore_sdk_jni.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libc++_shared.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libexpo-modules-core.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libexpo-updates.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libfbjni.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libfreetype.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libfreetyped.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libgifimage.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libgvr.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libgvr_audio.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libhermestooling.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libhermesvm.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libimagepipeline.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libjsi.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libnative-filters.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libnative-imagetranscoder.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libopenxr_loader.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libreact_codegen_safeareacontext.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libreactnative.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libreactvisioncca.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libstatic-webp.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libviro_arcore.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libviro_renderer.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libzstd-kmp.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true
+      }
+    ],
+    "resumo": {
+      "total_so": 60,
+      "so_64bits": 30,
+      "so_64bits_elf_16kb_ok": 30,
+      "so_64bits_fora_do_padrao": []
+    }
+  },
+  {
+    "arquivo": "cerise-ar-1.1.0-110.apk",
+    "bibliotecas": [
+      {
+        "abi": "arm64-v8a",
+        "lib": "libBulletCollision.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libBulletDynamics.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libBulletSoftBody.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libLinearMath.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libappmodules.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libarcore_sdk_c.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libarcore_sdk_jni.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libc++_shared.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libexpo-modules-core.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libexpo-updates.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libfbjni.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libfreetype.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libfreetyped.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libgifimage.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libgvr.so",
+        "bits": 64,
+        "p_align_min": 65536,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libgvr_audio.so",
+        "bits": 64,
+        "p_align_min": 65536,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libhermestooling.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libhermesvm.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libimagepipeline.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libjsi.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libnative-filters.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libnative-imagetranscoder.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libopenxr_loader.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libreact_codegen_safeareacontext.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libreactnative.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libreactvisioncca.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libstatic-webp.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libviro_arcore.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libviro_renderer.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "arm64-v8a",
+        "lib": "libzstd-kmp.so",
+        "bits": 64,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libBulletCollision.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libBulletDynamics.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libBulletSoftBody.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libLinearMath.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libappmodules.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libarcore_sdk_c.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libarcore_sdk_jni.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libc++_shared.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libexpo-modules-core.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libexpo-updates.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libfbjni.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libfreetype.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libfreetyped.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libgifimage.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libgvr.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libgvr_audio.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libhermestooling.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libhermesvm.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libimagepipeline.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libjsi.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libnative-filters.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libnative-imagetranscoder.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libopenxr_loader.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libreact_codegen_safeareacontext.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libreactnative.so",
+        "bits": 32,
+        "p_align_min": 4096,
+        "elf_16kb_ok": false,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libreactvisioncca.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libstatic-webp.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libviro_arcore.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libviro_renderer.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      },
+      {
+        "abi": "armeabi-v7a",
+        "lib": "libzstd-kmp.so",
+        "bits": 32,
+        "p_align_min": 16384,
+        "elf_16kb_ok": true,
+        "armazenado_sem_compressao": true,
+        "offset_zip_16kb_ok": true
+      }
+    ],
+    "resumo": {
+      "total_so": 60,
+      "so_64bits": 30,
+      "so_64bits_elf_16kb_ok": 30,
+      "so_64bits_fora_do_padrao": [],
+      "so_offset_zip_16kb_ok": 30
+    }
+  }
+]

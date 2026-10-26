@@ -1,0 +1,248 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project CeriseAR.xcodeproj -scheme CeriseAR -configuration Debug -destination id=00008120-001A031E2E5BC01E -derivedDataPath .build -allowProvisioningUpdates DEVELOPMENT_TEAM=6T2ZP362BQ CODE_SIGN_STYLE=Automatic build
+
+Build settings from command line:
+    CODE_SIGN_STYLE = Automatic
+    DEVELOPMENT_TEAM = 6T2ZP362BQ
+
+Resolve Package Graph
+
+
+Resolved source packages:
+  GLTFKit2: https://github.com/warrenm/GLTFKit2 @ master (be89e83)
+
+2026-09-16 16:35:13.223 xcodebuild[1922:34463] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (2 targets)
+    Target 'CeriseAR' in project 'CeriseAR'
+        ➜ Explicit dependency on target 'GLTFKit2' in project 'GLTFKit2'
+    Target 'GLTFKit2' in project 'GLTFKit2' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: 1bc38ad19e5d20717ba69a30ba3069ce
+Build description path: /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/XCBuildData/1bc38ad19e5d20717ba69a30ba3069ce.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk /Users/eduardocaixeta/CeriseAR/ios/.build/SDKStatCaches.noindex/iphoneos26.5-23F81a-32daed1954a7d5dd0789fcaf2a9bb78b.sdkstatcache
+    cd /Users/eduardocaixeta/CeriseAR/ios/CeriseAR.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -o /Users/eduardocaixeta/CeriseAR/ios/.build/SDKStatCaches.noindex/iphoneos26.5-23F81a-32daed1954a7d5dd0789fcaf2a9bb78b.sdkstatcache
+
+CreateBuildDirectory /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos
+    cd /Users/eduardocaixeta/CeriseAR/ios/CeriseAR.xcodeproj
+    builtin-create-build-directory /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR-c7fd4b53adc84bd03ccfcfaaca00e98f-VFS-iphoneos/all-product-headers.yaml
+    cd /Users/eduardocaixeta/CeriseAR/ios/CeriseAR.xcodeproj
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR-c7fd4b53adc84bd03ccfcfaaca00e98f-VFS-iphoneos/all-product-headers.yaml
+
+CreateBuildDirectory /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos
+    cd /Users/eduardocaixeta/CeriseAR/ios/CeriseAR.xcodeproj
+    builtin-create-build-directory /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos
+
+CreateBuildDirectory /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/PackageFrameworks
+    cd /Users/eduardocaixeta/CeriseAR/ios/CeriseAR.xcodeproj
+    builtin-create-build-directory /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/PackageFrameworks
+
+ProcessXCFramework /Users/eduardocaixeta/CeriseAR/ios/.build/SourcePackages/artifacts/gltfkit2/GLTFKit2/GLTFKit2.xcframework /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/GLTFKit2.framework ios
+    cd /Users/eduardocaixeta/CeriseAR/ios/CeriseAR.xcodeproj
+    builtin-process-xcframework --xcframework /Users/eduardocaixeta/CeriseAR/ios/.build/SourcePackages/artifacts/gltfkit2/GLTFKit2/GLTFKit2.xcframework --platform ios --target-path /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-all-non-framework-target-headers.hmap (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.hmap (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.hmap
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-all-target-headers.hmap (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-own-target-headers.hmap (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-project-headers.hmap (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-project-headers.hmap
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/DerivedSources/Entitlements.plist (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/DerivedSources/Entitlements.plist
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/Objects-normal/arm64/CeriseAR.SwiftConstValuesFileList (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/Objects-normal/arm64/CeriseAR.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/Objects-normal/arm64/CeriseAR.SwiftFileList (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/Objects-normal/arm64/CeriseAR.SwiftFileList
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/Objects-normal/arm64/CeriseAR_const_extract_protocols.json (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/Objects-normal/arm64/CeriseAR_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/Objects-normal/arm64/CeriseAR.LinkFileList (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/Objects-normal/arm64/CeriseAR.LinkFileList
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/Objects-normal/arm64/CeriseAR-OutputFileMap.json (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/Objects-normal/arm64/CeriseAR-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.DependencyMetadataFileList (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.DependencyStaticMetadataFileList (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-generated-files.hmap (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-generated-files.hmap
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-DebugDylibPath-normal-arm64.txt (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-DebugDylibInstallName-normal-arm64.txt (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    write-file /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR-DebugDylibInstallName-normal-arm64.txt
+
+MkDir /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    /bin/mkdir -p /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app
+
+MkDir /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/Frameworks (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    /bin/mkdir -p /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/Frameworks
+
+ProcessProductPackaging /Users/eduardocaixeta/Library/Developer/Xcode/UserData/Provisioning\ Profiles/db14f6c9-6b5b-468b-96c5-352f9d0a8c3d.mobileprovision /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/embedded.mobileprovision (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    builtin-productPackagingUtility /Users/eduardocaixeta/Library/Developer/Xcode/UserData/Provisioning\ Profiles/db14f6c9-6b5b-468b-96c5-352f9d0a8c3d.mobileprovision -o /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/embedded.mobileprovision
+
+ProcessProductPackaging "" /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.app.xcent (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    
+    Entitlements:
+    
+    {
+    "application-identifier" = "6T2ZP362BQ.br.ufg.cerise.arviewer";
+    "com.apple.developer.team-identifier" = 6T2ZP362BQ;
+    "get-task-allow" = 1;
+}
+    
+    builtin-productPackagingUtility -entitlements -format xml -o /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.app.xcent
+
+ProcessProductPackagingDER /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.app.xcent /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.app.xcent.der (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    /usr/bin/derq query -f xml -i /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.app.xcent -o /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/CeriseAR.app.xcent.der --raw
+
+CpResource /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/toy.glb /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/toy.glb (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/toy.glb /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app
+
+MkDir /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/assetcatalog_output/unthinned (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    /bin/mkdir -p /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/assetcatalog_output/unthinned
+
+MkDir /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/assetcatalog_output/thinned (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    /bin/mkdir -p /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/assetcatalog_output/thinned
+
+CpResource /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/robot.glb /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/robot.glb (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/robot.glb /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app
+
+CpResource /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/pikachu.glb /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/pikachu.glb (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/pikachu.glb /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app
+
+CpResource /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/parrot.glb /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/parrot.glb (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/parrot.glb /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app
+
+CpResource /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/helmet.glb /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/helmet.glb (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/helmet.glb /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app
+
+CpResource /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/flower.glb /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/flower.glb (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/flower.glb /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app
+
+CpResource /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/duck.glb /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/duck.glb (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/duck.glb /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app
+
+Ld /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/__preview.dylib normal (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios15.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -O0 -L/Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos -F/Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos -install_name @rpath/CeriseAR.debug.dylib -Xlinker -dead_strip -rdynamic -Xlinker -no_deduplicate -Xlinker -dependency_info -Xlinker /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/Objects-normal/arm64/CeriseAR_dependency_info.dat -Xlinker -no_adhoc_codesign -o /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/__preview.dylib
+
+GenerateAssetSymbols /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Assets.xcassets (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Assets.xcassets --compile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app --output-format human-readable-text --notices --warnings --export-dependency-info /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/assetcatalog_dependencies --output-partial-info-plist /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/assetcatalog_generated_info.plist --app-icon AppIcon --accent-color AccentColor --compress-pngs --enable-on-demand-resources YES --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 15.0 --platform iphoneos --bundle-identifier br.ufg.cerise.arviewer --generate-swift-asset-symbol-extensions NO --generate-swift-asset-symbols /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/DerivedSources/GeneratedAssetSymbols.swift --generate-objc-asset-symbols /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/DerivedSources/GeneratedAssetSymbols.h --generate-asset-symbol-index /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/* com.apple.actool.compilation-results */
+/Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/DerivedSources/GeneratedAssetSymbols.h
+/Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/DerivedSources/GeneratedAssetSymbols.swift
+
+
+CpResource /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/astronaut.glb /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/astronaut.glb (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Models/astronaut.glb /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app
+
+CpResource /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/WorkSans-Variable.ttf /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Fonts/WorkSans-Variable.ttf (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Resources/Fonts/WorkSans-Variable.ttf /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app
+
+Copy /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/Frameworks/GLTFKit2.framework /Users/eduardocaixeta/CeriseAR/ios/.build/SourcePackages/artifacts/gltfkit2/GLTFKit2/GLTFKit2.xcframework/ios-arm64/GLTFKit2.framework (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -bitcode-strip all -bitcode-strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip -resolve-src-symlinks -remove-static-executable /Users/eduardocaixeta/CeriseAR/ios/.build/SourcePackages/artifacts/gltfkit2/GLTFKit2/GLTFKit2.xcframework/ios-arm64/GLTFKit2.framework /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/Frameworks
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip /Users/eduardocaixeta/CeriseAR/ios/.build/SourcePackages/artifacts/gltfkit2/GLTFKit2/GLTFKit2.xcframework/ios-arm64/GLTFKit2.framework/GLTFKit2 -r -o /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/Frameworks/GLTFKit2.framework/GLTFKit2
+
+CompileAssetCatalogVariant thinned /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Assets.xcassets (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/eduardocaixeta/CeriseAR/ios/CeriseAR/Assets.xcassets --compile /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/assetcatalog_dependencies_thinned --output-partial-info-plist /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Intermediates.noindex/CeriseAR.build/Debug-iphoneos/CeriseAR.build/assetcatalog_generated_info.plist_thinned --app-icon AppIcon --accent-color AccentColor --compress-pngs --enable-on-demand-resources YES --filter-for-thinning-device-configuration iPhone15,3 --filter-for-device-os-version 26.6.1 --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 15.0 --platform iphoneos
+
+CodeSign /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/Frameworks/GLTFKit2.framework (in target 'CeriseAR' from project 'CeriseAR')
+    cd /Users/eduardocaixeta/CeriseAR/ios
+    
+    Signing Identity:     "Apple Development: eduardomart1934@icloud.com (2W85D7YQ4M)"
+    Provisioning Profile: "iOS Team Provisioning Profile: *"
+                          (db14f6c9-6b5b-468b-96c5-352f9d0a8c3d)
+    
+    /usr/bin/codesign --force --sign 4A473CCBAD5F9E05B63DD33F3AD34F759C51D32F --timestamp\=none --preserve-metadata\=identifier,entitlements,flags --generate-entitlement-der /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/Frameworks/GLTFKit2.framework
+/Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/Frameworks/GLTFKit2.framework: errSecInternalComponent
+Command CodeSign failed with a nonzero exit code
+
+** BUILD FAILED **
+
+
+The following build commands failed:
+	CodeSign /Users/eduardocaixeta/CeriseAR/ios/.build/Build/Products/Debug-iphoneos/CeriseAR.app/Frameworks/GLTFKit2.framework (in target 'CeriseAR' from project 'CeriseAR')
+	Building project CeriseAR with scheme CeriseAR and configuration Debug
+(2 failures)

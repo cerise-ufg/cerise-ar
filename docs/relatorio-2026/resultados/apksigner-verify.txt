@@ -1,0 +1,3 @@
+Verified using v2 scheme (APK Signature Scheme v2): true
+Signer #1 certificate DN: CN=CERISE AR Upload, OU=CERISE EMC, O=Universidade Federal de Goias, L=Goiania, ST=GO, C=BR
+Signer #1 certificate SHA-256 digest: c7e8466a27af507e6e15923a2655295705301568afb7edf39828fd1864f1b6d9

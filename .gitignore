@@ -33,5 +33,7 @@ google-services.json
 .DS_Store
 Thumbs.db
 *.log
+# Logs de evidencia dos builds e testes (versionados de proposito)
+!docs/**/*.log
 
 # Note: the iOS port keeps its own ignore rules in ios/.gitignore
