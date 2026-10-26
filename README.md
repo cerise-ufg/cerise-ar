@@ -53,6 +53,8 @@ RELEASES.md             artefatos grandes (AAB, APKs, IPAs, xcarchives, bundle O
 
 ## Como reproduzir
 
+**Roteiro de implementação:** o passo a passo completo para outra pessoa reproduzir o app 1.1.0 (requisitos, compilação Android e iOS, servidor de teste, OTA, Play Store e verificação) está em [`ROTEIRO.md`](ROTEIRO.md).
+
 ### App Expo (Android) — branch `feat/2026-gen3d-playstore`
 
 Requisitos: Node.js + npm, Android SDK (API 36), JDK 17. No Windows o caminho do projeto estoura o limite de
