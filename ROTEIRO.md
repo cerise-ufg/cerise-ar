@@ -166,18 +166,22 @@ O build release bloqueia `http://` para qualquer host exceto `10.0.2.2`, `localh
 1. Simulador. O `ViroKit.framework` só tem a fatia arm64 de dispositivo, por isso o build de simulador usa `CERISE_NO_VIRO=1`, que remove o módulo de RA (o app esconde as entradas de RA). O script do projeto supõe o clone em `~/CeriseAR`, compila para o iPhone 17 Pro (troque o `-destination` se o seu Xcode não tiver esse simulador) e grava o `.app` em `~/CeriseAR/build-sim-dd`:
 
 ```bash
-git clone https://github.com/cerise-ufg/cerise-ar.git ~/CeriseAR
+gh auth login                  # no Mac, se ainda não autenticou
+gh repo clone cerise-ufg/cerise-ar ~/CeriseAR
 cd ~/CeriseAR && git switch feat/2026-gen3d-playstore
 bash cerise-expo/tools/ios/build-ios-sim.sh
 ```
 
-O equivalente manual, dentro de `cerise-expo`, é:
+O equivalente manual, dentro de `~/CeriseAR/cerise-expo`, é o abaixo. Mantenha `CERISE_NO_VIRO=1` exportada em todos os passos: o `react-native.config.js` a lê no *autolinking*, que roda no `pod install`, e sem ela o ViroReact volta a ser ligado. O `-derivedDataPath` grava o `.app` no caminho usado no passo 2.
 
 ```bash
+export CERISE_NO_VIRO=1
 npm ci
-CERISE_NO_VIRO=1 npx expo prebuild -p ios --clean && (cd ios && pod install)
+npx expo prebuild -p ios --clean --no-install
+(cd ios && pod install)
 xcodebuild -workspace ios/CERISEAR.xcworkspace -scheme CERISEAR -sdk iphonesimulator \
-  -configuration Release CODE_SIGNING_ALLOWED=NO build
+  -configuration Release -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  -derivedDataPath ~/CeriseAR/build-sim-dd CODE_SIGNING_ALLOWED=NO build
 ```
 
 2. Abra o Simulador (Xcode → Open Developer Tool → Simulator), instale e abra o app e suba o *mock* no Mac; depois configure `http://localhost:18096` e repita o teste do fluxo (arraste uma foto para o Simulador para adicioná-la à galeria):
