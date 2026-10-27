@@ -85,8 +85,9 @@ O release é assinado com `keystore/cerise-upload.jks` (senha em `keystore/uploa
 Para o emulador x86_64 (que roda as libs ARM por tradução), gere um APK com bibliotecas extraídas:
 `.\gradlew.bat :app:assembleRelease '-Pexpo.useLegacyPackaging=true'`.
 
-**iOS (Mac)** — Simulador (sem assinatura, sem RA): `CERISE_NO_VIRO=1 npx expo prebuild -p ios --clean && (cd ios && pod install)`
-e `xcodebuild -workspace ios/CERISEAR.xcworkspace -scheme CERISEAR -sdk iphonesimulator -configuration Release CODE_SIGNING_ALLOWED=NO build`.
+**iOS (Mac)** — Simulador (sem assinatura, sem RA): `bash tools/ios/build-ios-sim.sh` (clone em `~/CeriseAR`) ou, à mão,
+`export CERISE_NO_VIRO=1` (vale também para o `pod install`, que faz o autolinking), `npx expo prebuild -p ios --clean --no-install && (cd ios && pod install)`
+e `xcodebuild -workspace ios/CERISEAR.xcworkspace -scheme CERISEAR -sdk iphonesimulator -configuration Release -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -derivedDataPath ~/CeriseAR/build-sim-dd CODE_SIGNING_ALLOWED=NO build`.
 iPhone/TestFlight: ver `store/IOS_IPHONE_TESTFLIGHT.md` (precisa da sessão gráfica do Mac).
 
 ## Resultados medidos (26/10/2026)
